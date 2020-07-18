@@ -1,2 +1,5 @@
-# nlapi-python
-Natural Language API SDK for Python, as part of expert.ai platform
+# expert.ai Natural Language API for Python
+
+Official Python client for the [expert.ai Natural Language API](https://developer.expert.ai/). Leverage Natural Language understanding from your Python apps.
+
+available soon
