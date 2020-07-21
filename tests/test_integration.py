@@ -14,11 +14,11 @@
 
 from unittest.mock import MagicMock
 
-from tests import ExpertTestCase
-from lib.expert import ExpertClient
+from tests import ExpertAiTestCase
+from expertai.client import ExpertAiClient
 
 
-class EaiIntegrationTest(ExpertTestCase):
+class ExpertAiIntegrationTests(ExpertAiTestCase):
 
     def test_get_iptc_taxonomies(self):
         response_data = {
@@ -37,22 +37,23 @@ class EaiIntegrationTest(ExpertTestCase):
         response.ok = True
         response.json.return_value = response_data
 
-        self.patched_requests.get.return_value = response
-        client = ExpertClient()
+        self.patched_get.return_value = response
+        client = ExpertAiClient()
         response = client.iptc_taxonomies()
         self.assertEqual(response.json, response_data)
+        self.assertEqual(self.patched_post.call_count, 1)
 
         
     def test_post_classification(self):
-        response = MagicMock()
+        response = MagicMock(text="e@i")
         response.status_code = 200
-        response.ok = True
         response.json.return_value = {"response": "data"}
-        self.patched_requests.post.return_value = response
+        self.patched_post.return_value = response
 
-        client = ExpertClient()
+        client = ExpertAiClient()
         request_body = {"document": {"text": "text"}}
         response = client.full_analysis(body=request_body, params={'language': 'es'})
 
-        # self.assertEqual(self.patched_requests.post.call_count, 1)
+        # two POST requests are made, one for the token and one for analysis
+        self.assertEqual(self.patched_post.call_count, 2)
         self.assertEqual(response.json, {"response": "data"})

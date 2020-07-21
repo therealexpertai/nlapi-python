@@ -17,7 +17,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class ExpertBaseException(Exception):
+class ExpertAiBaseException(Exception):
     def __init__(self, message, **kwargs):
         super().__init__(message, **kwargs)
         if kwargs.get('exception'):
@@ -25,19 +25,23 @@ class ExpertBaseException(Exception):
         logger.error(message)
 
 
-class CredentialsError(ExpertBaseException):
+class CredentialsError(ExpertAiBaseException):
     """"""
 
 
-class ExpertRequestError(ExpertBaseException):
+class ExpertAiRequestError(ExpertAiBaseException):
     """"""
 
 
-class MissingParameterError(ExpertBaseException):
+class MissingParametersError(ExpertAiBaseException):
     """"""
 
+
+class ParameterError(ExpertAiBaseException):
+    """"""
     
-class ETypeError(ExpertBaseException):
+    
+class ETypeError(ExpertAiBaseException):
 
     def __init__(self, expected, current):
         message = "Found {current_type}, expecting {expected_type}".format(
@@ -47,7 +51,7 @@ class ETypeError(ExpertBaseException):
         super().__init__(message)
 
 
-class EValueError(ExpertBaseException):
+class EValueError(ExpertAiBaseException):
     
     def __init__(self, value, argument):
         message = "Wrong value {current_value}, for {ref_argument}".format(

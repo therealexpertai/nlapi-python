@@ -16,28 +16,35 @@ import os
 from unittest import TestCase, skip
 from unittest.mock import patch, MagicMock
 
-from lib import constants
+from expertai import constants
 
+import requests
 
 class BaseTestCase(TestCase):
     """"""
 
 
-class ExpertTestCase(BaseTestCase):
+class ExpertAiTestCase(BaseTestCase):
+
     def setUp(self):
-        patcher = patch('lib.expert.requests')
-        self.patched_requests = patcher.start()
+        requests_post_patched = patch.object(requests, 'post')
+        self.patched_post = requests_post_patched.start()
+
+        requests_get_patched = patch.object(requests, 'get')
+        self.patched_get = requests_get_patched.start()
 
         self.endpoint_path = "language/resource"
 
-        # self.api_url = "{}/{}".format(constants.BASE_API_URL, self.test_url)
+        response = MagicMock(text="")
+        self.patched_post.return_value = response
 
         environment_variables_patch = patch.dict(os.environ, {
             constants.USERNAME_ENV_VARIABLE: "user@eai",
-            constants.PASSWORD_ENV_VARIABLE: "pw"
+            constants.PASSWORD_ENV_VARIABLE: "pw",
         })
         environment_variables_patch.start()
-        self.addCleanup(patcher.stop)
+
+        self.addCleanup(requests_get_patched.stop)
+        self.addCleanup(requests_post_patched.stop)
         self.addCleanup(environment_variables_patch.stop)
-        
         super().setUp()

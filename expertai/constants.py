@@ -18,6 +18,7 @@ OAUTH2_TOKEN_URL = "https://developer.expert.ai/oauth2/token"
 
 USERNAME_ENV_VARIABLE = "EAI_USERNAME"
 PASSWORD_ENV_VARIABLE = "EAI_PASSWORD"
+TOKEN_ENV_VARIABLE = "AUTH_TOKEN"
 
 TK_TIMESTAMP_FILENAME = ".timestamp"
 
@@ -60,3 +61,13 @@ HTTP_ERRORS = [
     HTTP_INTERNAL_SERVER_ERROR,
 ]
 
+
+PARAMETER_NAMES = ['language', 'resource']
+
+LANGUAGE_ISO_639_1_CODES = ["de", "en", "es", "fr", "it"]
+
+RESOURCES_NAMES = [
+    "disambiguation",
+    "relevants",
+    "entities"
+]

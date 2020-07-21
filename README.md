@@ -3,7 +3,14 @@
 Python client for the [expert.ai Natural Language API](https://developer.expert.ai/). Leverage Natural Language understanding from your Python apps.
 
 
-Installation
+Installation (development)
+---------------
+```
+pip install -i https://test.pypi.org/simple/ expertai-test
+```
+
+
+Installation (contributor)
 ---------------
 
 Clone the repository and run the following script:
@@ -32,12 +39,19 @@ export EAI_USERNAME=YOUR_USER
 export EAI_PASSWORD=YOUR_PASSWORD
 ```
 
+or from within the Python shell:
+
+```python
+import os
+os.environ["EAI_USERNAME"] = YOUR_USER
+os.environ["EAI_PASSWORD"] = YOUR_PASSWORD
+```
+
 and then you can code as follows:
 
 ```python
-from lib.expert import ExpertClient
-# Instantiate the client Using your API key
-eai = ExpertClient()
+from expertai.client import ExpertAiClient
+eai = ExpertAiClient()
 ```
 
 
@@ -51,10 +65,7 @@ text = 'Facebook is looking at buying U.S. startup for $6 million'
 language= 'en'
 
 ##get Named Entities
-response = eai.specific_resource_analysis,
-      body={"document": {"text": text}},
-      params={'language': language, 'resource': 'entities'}
-   )
+response = eai.specific_resource_analysis(body={"document": {"text": text}}, params={'language': language, 'resource': 'entities'})
 ```
 
 or to [classify it](#document-classification) according the IPTC Media Topics taxonomy:
@@ -65,9 +76,7 @@ text = 'Facebook is looking at buying U.S. startup for $6 million'
 language= 'en'
 
 ##get Media Topics Classification
-response = eai.iptc_media_topics_classification,
-      body={"document": {"text": text}},
-      params={'language': language}
+response = eai.iptc_media_topics_classification(body={"document": {"text": text}}, params={'language': language})
 ```
 
 
