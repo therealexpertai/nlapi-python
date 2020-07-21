@@ -3,14 +3,7 @@
 Python client for the [expert.ai Natural Language API](https://developer.expert.ai/). Leverage Natural Language understanding from your Python apps.
 
 
-Installation (development)
----------------
-```
-pip install -i https://test.pypi.org/simple/ expertai-test
-```
-
-
-Installation (contributor)
+Installation 
 ---------------
 
 Clone the repository and run the following script:
@@ -202,13 +195,3 @@ These are all the endpoints of the API. For more information about each endpoint
 
 * [IPTC Media Topics classification](https://docs.expert.ai/nlapi/v1/reference/output/classification/)
 
-
-
-Demo mode
---------
-
-You find a demo script in the package that you can use as starting poing for developing your application.
-
-```bash
-python demo.py
-```
