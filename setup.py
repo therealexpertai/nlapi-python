@@ -18,8 +18,8 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="expertai-test", 
-    version="1.0.0",
+    name="expertai-nlapi", 
+    version="1.0.4",
     author="Expert System S.p.A.",
     author_email="api.support@expert.ai",
     description="Python client for expert.ai Natural Language API",

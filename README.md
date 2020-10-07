@@ -2,8 +2,17 @@
 
 Python client for the [expert.ai Natural Language API](https://developer.expert.ai/). Leverage Natural Language understanding from your Python apps.
 
+Installation (development)
+---------------
 
-Installation 
+You can use pip to install the library:
+
+```bash
+$ pip install expertai-nlapi
+```
+
+
+Installation (contributor)
 ---------------
 
 Clone the repository and run the following script:
