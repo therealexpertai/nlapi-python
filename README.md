@@ -27,7 +27,7 @@ $ cd nlapi-python
 $ pip install -r requirements-dev.txt
 ```
 
-> As good practice it's recommended to work in a isolated Python environment, creating a virtual environment with [virtualenv package](https://virtualenv.pypa.io/en/stable/installation.html) before building the package. You can create an isolated environment with the command
+> As good practice it's recommended to work in an isolated Python environment, creating a virtual environment with [virtualenv package](https://virtualenv.pypa.io/en/stable/installation.html) before building the package. You can create your environment with the command
 
  ```bash
 $ virtualenv expertai
@@ -38,15 +38,22 @@ $ source expertai/bin/activate
 ## Usage
 
 
-Before making requests to the API, you need to create an instance of the `ExpertClient`. You will set your [API Credentials](https://developer.expert.ai/ui/login) as environment variables:
+Before making requests to the API, you need to create an instance of the `ExpertClient`. You have to set your [API Credentials](https://developer.expert.ai/ui/login) as environment variables:
 
 ```bash
 export EAI_USERNAME=YOUR_USER
 export EAI_PASSWORD=YOUR_PASSWORD
 ```
 
+or to define them as part of your code
 
-Currently the API supports five languages such as English, French, Spanish, Italian and German. You have the define the text you want to process and the language model to use for the analysis.
+```python
+import os
+os.environ["EAI_USERNAME"] = 'your@account.email'
+os.environ["EAI_PASSWORD"] = 'yourpwd'
+```
+
+Currently, the API supports five languages, i.e. English, French, Spanish, Italian and German. You have to define the text you want to process and the language model to use for the analysis.
 
 
 ```python
@@ -61,7 +68,7 @@ language= 'en'
 ```
 
 ### Quick run
-Let's start with the fist API call to check what does, just sending the text. This is how it looks like.
+Let's start with the first API call just sending the text. 
 
 
 ```python
@@ -71,7 +78,7 @@ document = client.specific_resource_analysis(
 })
 ```
 
-We request a `disambiguation` analysis that returns all the information that the Natural Language engine comprehended from the text. Let's see in the details 
+A `disambiguation` analysis returns all the information that the Natural Language engine comprehended from the text. Let's see in the details the API response.
 
 ### Tokenization & Lemmatization
 Lemmatization looks beyond word reduction, and considers a language's full vocabulary to apply a *morphological analysis* to words. The lemma of 'was' is 'be' and the lemma of 'mice' is 'mouse'. Further, the lemma of 'meeting' might be 'meet' or 'meeting' depending on its use in a sentence.
@@ -101,7 +108,7 @@ for token in document.tokens:
     
 
 ###  Part of Speech 
-We also looked at the part-of-speech information assigned to each token
+We also looked at the part-of-speech information assigned to each token; PoS values are from the [Universal Dependencies](https://universaldependencies.org/) framework
 
 
 ```python
@@ -128,7 +135,7 @@ for token in document.tokens:
      
 
 ### Dependency Parsing information
-We also looked at the dependency parsing information assigned to each token
+The analysis returns the dependency parsing information assigned to each token, using the Universal Dependencies framework as well.
 
 
 ```python
@@ -176,7 +183,8 @@ for entity in document.entities:
     Facebook Inc.        COM        Businesses / companies
     
 
-Then you can get the open data connected with the entity `Springfield, IL` 
+In addition to the entity type, the API provides some metadata from Linked Open Data sources such as WikiData and GeoNames.
+For example, you can get the open data connected with the entity `Springfield, IL` 
 
 
 ```python
@@ -201,10 +209,10 @@ for entry in document.knowledge:
     WikiDataId   Q28515                        
     
 
-Springfield has been recognize as [Q28515](https://www.wikidata.org/wiki/Q28515) on Wikidata, that is the Q-id for Springfied, IL (i.e.not for Springfield in Vermont o in California)
+Springfield has been recognized as [Q28515](https://www.wikidata.org/wiki/Q28515) on Wikidata, that is the Q-id for Springfield, IL (i.e.not for Springfield in Vermont o in California)
 
 ### Key Elements
-*Key elements* are identified from the document as main sentences, main keywords, main lemmas and relevant topics; let's focus on the main lemmas of the document.
+*Key elements* are identified from the document as main sentences, main keywords, main lemmas and relevant topics; let's focus on the main lemmas of the document; each lemma is provided with a relevance score.
 
 
 ```python
@@ -226,7 +234,7 @@ for mainlemma in document.main_lemmas:
     
 
 ### Classification
-Let's see how to classify documents according the **IPTC Media Topics Taxonomy**; we're going to use a text that has more textual information and then we'll use the matplot lib to show the categorization result
+Let's see how to classify documents according to the [**IPTC Media Topics Taxonomy**](https://iptc.org/standards/media-topics/); we're going to use a text that has more textual information and then we'll use the matplot lib to show a bar chart with the categorization results
 
 
 ```python
@@ -276,9 +284,9 @@ plt.show()
     
 
 
-Good job! You're an expert of expert.ai community!
+Good job! You're an expert in the expert.ai community! :clap: :tada:
 
-Check out other language SDKs available on our [github page](https://github.com/therealexpertai).
+Check out other language SDKs available on our [Github page](https://github.com/therealexpertai).
 
 
 ## Available endpoints
