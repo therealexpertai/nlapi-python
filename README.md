@@ -280,8 +280,7 @@ plt.show()
 
 
     
-![png](chart_output.png)
-    
+![png](https://raw.githubusercontent.com/therealexpertai/nlapi-python/master/chart_output.png)  
 
 
 Good job! You're an expert in the expert.ai community! :clap: :tada:
