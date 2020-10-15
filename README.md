@@ -111,7 +111,7 @@ for token in document.tokens:
     print (f'{text[token.start:token.end]:{18}} {token.pos.key:{4}}  ' )
 ```
 
-    TOKEN              Pos   
+    TOKEN              PoS   
     Facebook           PROPN  
     is                 AUX    
     looking at         VERB   
