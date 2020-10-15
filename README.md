@@ -14,7 +14,7 @@ Python client for the [expert.ai Natural Language API](https://developer.expert.
 You can use pip to install the library:
 
 ```bash
-$ pip install expertai-nlapi
+$ pip -U install expertai-nlapi
 ```
 
 
@@ -105,27 +105,26 @@ We also looked at the part-of-speech information assigned to each token
 
 
 ```python
-print (f'{"TOKEN":{18}} {"Type":{4}}')
+print (f'{"TOKEN":{18}} {"PoS":{4}}')
 
 for token in document.tokens:
-    print (f'{text[token.start:token.end]:{18}} {token.type_:{4}}  ' )
+    print (f'{text[token.start:token.end]:{18}} {token.pos.key:{4}}  ' )
 ```
 
-    TOKEN              PoS PoS Description
-    TOKEN              Type
-    Facebook             NPR.COM 
-    is                   AUX  
-    looking at           VER    
-    buying               VER  
-    an                   ART  
-    American             ADJ  
-    startup              NOU  
-    for                  PRE  
-    $6 million           NOU.MON 
-    based                VER  
-    in                   PRE  
-    Springfield, IL      NPR.GEO 
-    .                    PNT 
+    TOKEN              Pos   
+    Facebook           PROPN  
+    is                 AUX    
+    looking at         VERB   
+    buying             VERB   
+    an                 DET    
+    American           ADJ    
+    startup            NOUN   
+    for                ADP    
+    $6 million         NOUN   
+    based              VERB   
+    in                 ADP    
+    Springfield, IL    PROPN  
+    .                  PUNCT   
      
 
 ### Dependency Parsing information

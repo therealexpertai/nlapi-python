@@ -53,4 +53,4 @@ class PosTag:
 
     @property
     def description(self):
-        return self._description
+        return POSTAG_VALUES.get(self._key)

@@ -68,13 +68,9 @@ class TokenType:
         )
 
     @property
-    def description_from_key(self):
-        return TOKEN_TYPE_VALUES.get(self._key)
-
-    @property
     def key(self):
         return self._key
 
     @property
     def description(self):
-        return self._description
+        return TOKEN_TYPE_VALUES.get(self._key)
