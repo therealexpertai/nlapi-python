@@ -12,24 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from datetime import datetime
-import logging
-import os
-import re
 import requests
 
 from expertai import constants
 from expertai.authentication import ExpertAiAuth
-from expertai.response import ExpertAiResponse
-from expertai.errors import CredentialsError, ExpertAiRequestError
+from expertai.errors import ExpertAiRequestError
 
 
 class ExpertAiRequest:
-
     def __init__(self, endpoint_path, http_method_name, **kwargs):
         self._endpoint_path = endpoint_path
         self.string_method = http_method_name
-        self._body = kwargs.get('body')
+        self._body = kwargs.get("body")
 
     @property
     def url(self):
@@ -38,12 +32,21 @@ class ExpertAiRequest:
     @property
     def headers(self):
         header = ExpertAiAuth().header
-        header.update(**{'Content-Type': 'application/json'})
+        header.update(**{"Content-Type": "application/json"})
         return header
 
     def send(self):
         """
-        TODO: doc why IOError
+        Transmits the real HTTP request
+
+        The reason why the Exception being caught is IOError is that
+        pure network exceptions triggered by the request library are
+        subclasses of IOError.
+
+        Although all exceptions that Requests explicitly raises
+        inherit from requests.exceptions.RequestException, the only
+        way to catch them is to user the super-super class, which
+        in this case is IOError
         """
         try:
             http_method, req_parameters = self.setup_raw_request()
@@ -51,20 +54,17 @@ class ExpertAiRequest:
         except IOError as e:
             raise ExpertAiRequestError(
                 "The following error occurred: {exception}".format(
-                    exception=e.__class__.__name__))
+                    exception=e.__class__.__name__
+                )
+            )
 
     def setup_raw_request(self):
-        req_parameters = {
-            'url': self.url,
-            'headers': self.headers
-        }
+        req_parameters = {"url": self.url, "headers": self.headers}
         if self._body:
             req_parameters.update(json=self._body)
 
-        if self.string_method == 'GET':
+        if self.string_method == constants.HTTP_GET:
             http_method = requests.get
         else:
             http_method = requests.post
         return http_method, req_parameters
-
-

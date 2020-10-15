@@ -20,8 +20,8 @@ logger = logging.getLogger(__name__)
 class ExpertAiBaseException(Exception):
     def __init__(self, message, **kwargs):
         super().__init__(message, **kwargs)
-        if kwargs.get('exception'):
-            message += "{}".format(kwargs.get('exception'))
+        if kwargs.get("exception"):
+            message += "{}".format(kwargs.get("exception"))
         logger.error(message)
 
 
@@ -37,26 +37,36 @@ class MissingParametersError(ExpertAiBaseException):
     """"""
 
 
+class MissingArgumentError(ExpertAiBaseException):
+    """"""
+
+
 class ParameterError(ExpertAiBaseException):
     """"""
-    
-    
-class ETypeError(ExpertAiBaseException):
 
+
+class ObjectMapperError(ExpertAiBaseException):
+    """"""
+
+
+class ETypeError(ExpertAiBaseException):
     def __init__(self, expected, current):
+        current_type_name = getattr(
+            current, "__name__", current.__class__.__name__
+        )
+        expected_type_name = getattr(
+            expected, "__name__", expected.__class__.__name__
+        )
         message = "Found {current_type}, expecting {expected_type}".format(
-            current_type=current.__class__.__name__,
-            expected_type=expected.__class__.__name__,
+            current_type=current_type_name if current else "NoneType",
+            expected_type=expected_type_name if expected else "NoneType",
         )
         super().__init__(message)
 
 
 class EValueError(ExpertAiBaseException):
-    
     def __init__(self, value, argument):
         message = "Wrong value {current_value}, for {ref_argument}".format(
             current_value=value, ref_argument=argument,
         )
         super().__init__(message)
-
-

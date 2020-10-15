@@ -19,9 +19,10 @@ OAUTH2_TOKEN_URL = "https://developer.expert.ai/oauth2/token"
 USERNAME_ENV_VARIABLE = "EAI_USERNAME"
 PASSWORD_ENV_VARIABLE = "EAI_PASSWORD"
 TOKEN_ENV_VARIABLE = "AUTH_TOKEN"
+AUTH_HEADER_KEY = "Authorization"
+AUTH_HEADER_VALUE = "Bearer {}"
 
 TK_TIMESTAMP_FILENAME = ".timestamp"
-
 
 # No leading slash
 FULL_ANALYSIS_PATH = "analyze/standard/{language}"
@@ -33,10 +34,7 @@ CONTEXTS_STANDARD_PATH = "contexts/standard"
 TAXONOMIES_LIST_PATH = "taxonomies"
 IPTC_TAXONOMIES_PATH = "taxonomies/iptc"
 
-
 CONTENT_TYPE_HEADER = {"Content-Type": "application/json"}
-AUTH_HEADER_KEY = "Authorization"
-AUTH_HEADER_VALUE = "Bearer {}"
 
 URLS_AND_METHODS = (
     (FULL_ANALYSIS_PATH, "POST"),
@@ -45,29 +43,39 @@ URLS_AND_METHODS = (
     (CONTEXTS_PATH, "GET"),
     (CONTEXTS_STANDARD_PATH, "GET"),
     (TAXONOMIES_LIST_PATH, "GET"),
-    (IPTC_TAXONOMIES_PATH, "GET")
+    (IPTC_TAXONOMIES_PATH, "GET"),
 )
 
-HTTP_OK = 200
+HTTP_GET = "GET"
+HTTP_SUCCESSFUL = 200
+HTTP_BAD_REQUEST = 400
 HTTP_UNAUTHORIZED = 401
 HTTP_FORBIDDEN = 403
 HTTP_NOT_FOUND = 404
 HTTP_INTERNAL_SERVER_ERROR = 500
 
-HTTP_ERRORS = [
-    HTTP_UNAUTHORIZED,
-    HTTP_FORBIDDEN,
-    HTTP_NOT_FOUND,
-    HTTP_INTERNAL_SERVER_ERROR,
-]
+# Strings used when print out the status of a EaiResponse
+HTTP_ERRORS = {
+    HTTP_UNAUTHORIZED: "UNAUTHORIZED",
+    HTTP_FORBIDDEN: "FORBIDDEN",
+    HTTP_NOT_FOUND: "NOT FOUND",
+    HTTP_INTERNAL_SERVER_ERROR: "INTERNAL SERVER ERROR",
+}
 
+UNKNOWN = "UNKNOWN_STATUS"
+SUCCESSFUL = "SUCCESSFUL"
+BAD_REQUEST = "BAD REQUEST"
 
-PARAMETER_NAMES = ['language', 'resource']
+PARAMETER_NAMES = ["language", "resource"]
 
-LANGUAGE_ISO_639_1_CODES = ["de", "en", "es", "fr", "it"]
+LANGUAGES = {
+    "de": "German",
+    "en": "English",
+    "es": "Spanish",
+    "fr": "French",
+    "it": "Italian",
+}
 
-RESOURCES_NAMES = [
-    "disambiguation",
-    "relevants",
-    "entities"
-]
+RESOURCES_NAMES = ["disambiguation", "relevants", "entities"]
+
+RESPONSE_KEYS_TO_IGNORE = ["language", "version", "content"]

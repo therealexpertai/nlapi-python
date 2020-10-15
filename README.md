@@ -1,9 +1,15 @@
+<img style="float: right;" src="https://docs.expert.ai/logo.png" width="150px">
+
+
 # expert.ai Natural Language API for Python
+
 
 Python client for the [expert.ai Natural Language API](https://developer.expert.ai/). Leverage Natural Language understanding from your Python apps.
 
-Installation (development)
----------------
+ 
+
+
+## Installation (development)
 
 You can use pip to install the library:
 
@@ -12,8 +18,7 @@ $ pip install expertai-nlapi
 ```
 
 
-Installation (contributor)
----------------
+## Installation (contributor)
 
 Clone the repository and run the following script:
 
@@ -30,8 +35,7 @@ $ source expertai/bin/activate
 ```
 
 
-Usage
-------
+## Usage
 
 
 Before making requests to the API, you need to create an instance of the `ExpertClient`. You will set your [API Credentials](https://developer.expert.ai/ui/login) as environment variables:
@@ -41,151 +45,244 @@ export EAI_USERNAME=YOUR_USER
 export EAI_PASSWORD=YOUR_PASSWORD
 ```
 
-or from within the Python shell:
 
-```python
-import os
-os.environ["EAI_USERNAME"] = YOUR_USER
-os.environ["EAI_PASSWORD"] = YOUR_PASSWORD
-```
+Currently the API supports five languages such as English, French, Spanish, Italian and German. You have the define the text you want to process and the language model to use for the analysis.
 
-and then you can code as follows:
 
 ```python
 from expertai.client import ExpertAiClient
-eai = ExpertAiClient()
+client = ExpertAiClient()
 ```
 
 
-### Requests
-
-From the client instance, you can call any endpoint (check the [available endpoints](#available-endpoints) below). For example, you can get [named entities](#document-analysis) from a text document:
-
-
 ```python
-text = 'Facebook is looking at buying U.S. startup for $6 million' 
+text = 'Facebook is looking at buying an American startup for $6 million based in Springfield, IL .' 
 language= 'en'
-
-##get Named Entities
-response = eai.specific_resource_analysis(body={"document": {"text": text}}, params={'language': language, 'resource': 'entities'})
 ```
 
-or to [classify it](#document-classification) according the IPTC Media Topics taxonomy:
+### Quick run
+Let's start with the fist API call to check what does, just sending the text. This is how it looks like.
 
 
 ```python
-text = 'Facebook is looking at buying U.S. startup for $6 million' 
-language= 'en'
-
-##get Media Topics Classification
-response = eai.iptc_media_topics_classification(body={"document": {"text": text}}, params={'language': language})
+document = client.specific_resource_analysis(
+    body={"document": {"text": text}}, 
+    params={'language': language, 'resource': 'disambiguation'
+})
 ```
 
+We request a `disambiguation` analysis that returns all the information that the Natural Language engine comprehended from the text. Let's see in the details 
 
-### Responses
+### Tokenization & Lemmatization
+Lemmatization looks beyond word reduction, and considers a language's full vocabulary to apply a *morphological analysis* to words. The lemma of 'was' is 'be' and the lemma of 'mice' is 'mouse'. Further, the lemma of 'meeting' might be 'meet' or 'meeting' depending on its use in a sentence.
 
-The response object returned by every endpoint call is a JSON file as detailed in the [Output reference](https://docs.expert.ai/nlapi/v1/reference/output/):
-
-For Named Entity extraction:
 
 ```python
-pprint(response.json)
+print (f'{"TOKEN":{20}} {"LEMMA":{8}}')
+
+for token in document.tokens:
+    print (f'{text[token.start:token.end]:{20}} {token.lemma:{8}}')
 ```
 
-```json
-{
-  "content": "Facebook is looking at buying U.S. startup for $6 million",
-  "entities": [
-    {
-      "lemma": "6,000,000 dollar",
-      "positions": [
-        {
-          "end": 57,
-          "start": 47
-        }
-      ],
-      "syncon": -1,
-      "type": "MON"
-    },
-    {
-      "lemma": "Facebook Inc.",
-      "positions": [
-        {
-          "end": 8,
-          "start": 0
-        }
-      ],
-      "syncon": 288110,
-      "type": "COM"
-    }
-  ],
-  "knowledge": [
-    {
-      "label": "organization.company",
-      "properties": [
-        {
-          "type": "DBpediaId",
-          "value": "dbpedia.org/page/Facebook,_Inc."
-        },
-        {
-          "type": "WikiDataId",
-          "value": "Q380"
-        }
-      ],
-      "syncon": 288110
-    }
-  ],
-  "language": "en",
-  "version": "sensei: 3.1.0; disambiguator: 15.0-QNTX-2016"
-}
-```
-For Document classification:
+    TOKEN                LEMMA   
+    Facebook             Facebook Inc.
+    is                   is      
+    looking at           look at 
+    buying               buy     
+    an                   an      
+    American             American
+    startup              startup 
+    for                  for     
+    $6 million           6,000,000 dollar
+    based                base    
+    in                   in      
+    Springfield, IL      Springfield
+    .                    .       
+    
+
+###  Part of Speech 
+We also looked at the part-of-speech information assigned to each token
+
 
 ```python
-pprint(response.json)
+print (f'{"TOKEN":{18}} {"Type":{4}}')
+
+for token in document.tokens:
+    print (f'{text[token.start:token.end]:{18}} {token.type_:{4}}  ' )
 ```
 
-```json
-{
-  "categories": [
-    {
-      "frequency": 64.63,
-      "hierarchy": [
-        "Economy, business and finance",
-        "Business information",
-        "Strategy and marketing",
-        "Merger or acquisition"
-      ],
-      "id": "20000204",
-      "label": "Merger or acquisition",
-      "namespace": "iptc_en_1.0",
-      "positions": [
-        {
-          "end": 8,
-          "start": 0
-        },
-        {
-          "end": 29,
-          "start": 23
-        },
-        {
-          "end": 42,
-          "start": 35
-        }
-      ],
-      "score": 1335,
-      "winner": true
-    }
-  ],
-  "content": "Facebook is looking at buying U.S. startup for $6 million",
-  "language": "en",
-  "version": "sensei: 3.1.0; disambiguator: 14.5-QNTX-2016"
-}
+    TOKEN              PoS PoS Description
+    TOKEN              Type
+    Facebook             NPR.COM 
+    is                   AUX  
+    looking at           VER    
+    buying               VER  
+    an                   ART  
+    American             ADJ  
+    startup              NOU  
+    for                  PRE  
+    $6 million           NOU.MON 
+    based                VER  
+    in                   PRE  
+    Springfield, IL      NPR.GEO 
+    .                    PNT 
+     
+
+### Dependency Parsing information
+We also looked at the dependency parsing information assigned to each token
+
+
+```python
+print (f'{"TOKEN":{18}} {"Dependency label":{8}}')
+
+for token in document.tokens:
+    print (f'{text[token.start:token.end]:{18}} {token.dependency.label:{4}} ' )
+```
+
+    TOKEN              Dependency label
+    Facebook           nsubj 
+    is                 aux  
+    looking at         root 
+    buying             advcl 
+    an                 det  
+    American           amod 
+    startup            obj  
+    for                case 
+    $6 million         obl  
+    based              acl  
+    in                 case 
+    Springfield, IL    obl  
+    .                  punct 
+    
+
+### Named Entities
+Going a step beyond tokens, *named entities* add another layer of context.  Named entities are accessible through the `entities` object.
+
+
+```python
+document = client.specific_resource_analysis(
+    body={"document": {"text": text}}, 
+    params={'language': language, 'resource': 'entities'})
+
+
+print (f'{"ENTITY":{20}} {"TYPE":{10}} {"TYPE_EXPLAINED":{10}}')
+       
+for entity in document.entities:
+    print (f'{entity.lemma:{20}} {entity.type_.key:{10}} {entity.type_.description:{10}}')
+```
+
+    ENTITY               TYPE       TYPE_EXPLAINED
+    6,000,000 dollar     MON        Money     
+    Springfield          GEO        Administrative geographic areas
+    Facebook Inc.        COM        Businesses / companies
+    
+
+Then you can get the open data connected with the entity `Springfield, IL` 
+
+
+```python
+print(document.entities[1].lemma)
+```
+
+    Springfield
+    
+
+
+```python
+for entry in document.knowledge:
+    if (entry.syncon == document.entities[1].syncon):
+            for prop in entry.properties:
+                print (f'{prop.type_:{12}} {prop.value:{30}}')
+    
+```
+
+    Coordinate   Lat:39.47.58N/39.799446;Long:89.39.18W/-89.654999
+    DBpediaId    dbpedia.org/page/Springfield  
+    GeoNamesId   4250542                       
+    WikiDataId   Q28515                        
+    
+
+Springfield has been recognize as [Q28515](https://www.wikidata.org/wiki/Q28515) on Wikidata, that is the Q-id for Springfied, IL (i.e.not for Springfield in Vermont o in California)
+
+### Key Elements
+*Key elements* are identified from the document as main sentences, main keywords, main lemmas and relevant topics; let's focus on the main lemmas of the document.
+
+
+```python
+document = client.specific_resource_analysis(
+    body={"document": {"text": text}}, 
+    params={'language': language, 'resource': 'relevants'})
+
+
+print (f'{"LEMMA":{20}} {"SCORE":{5}} ')
+       
+for mainlemma in document.main_lemmas:
+    print (f'{mainlemma.value:{20}} {mainlemma.score:{5}}')
+```
+
+    LEMMA                SCORE 
+    Facebook Inc.         43.5
+    startup               40.4
+    Springfield             15
+    
+
+### Classification
+Let's see how to classify documents according the **IPTC Media Topics Taxonomy**; we're going to use a text that has more textual information and then we'll use the matplot lib to show the categorization result
+
+
+```python
+text = """Strategic acquisitions have been important to the growth of Facebook (FB). 
+Mark Zuckerberg founded the company in 2004, and since then it has acquired scores of companies, 
+ranging from tiny two-person start-ups to well-established businesses such as WhatsApp. For 2019, 
+Facebook reported 2.5 billion monthly active users (MAU) and $70.69 billion in revenue."""
 ```
 
 
-Available endpoints
-------------------------
+```python
+import matplotlib.pyplot as plt
+%matplotlib inline
+plt.style.use('ggplot')
+
+document = client.iptc_media_topics_classification(body={"document": {"text": text}}, params={'language': language})
+
+categories = []
+scores = []
+
+print (f'{"CATEGORY":{27}} {"IPTC ID":{10}} {"FREQUENCY":{8}}')
+for category in document.categories:
+    categories.append(category.label)
+    scores.append(category.frequency)
+    print (f'{category.label:{27}} {category.id_:{10}}{category.frequency:{8}}')
+    
+    
+```
+
+    CATEGORY                    IPTC ID    FREQUENCY
+    Earnings                    20000178     29.63
+    Social networking           20000769     21.95
+
+```python
+plt.bar(categories, scores, color='#17a2b8')
+plt.xlabel("Categories")
+plt.ylabel("Frequency")
+plt.title("Media Topics Classification")
+
+plt.show()
+
+```
+
+
+    
+![png](chart_output.png)
+    
+
+
+Good job! You're an expert of expert.ai community!
+
+Check out other language SDKs available on our [github page](https://github.com/therealexpertai).
+
+
+## Available endpoints
 
 These are all the endpoints of the API. For more information about each endpoint, check out the [API documentation](https://docs.expert.ai/nlapi/v1/).
 
@@ -203,4 +300,5 @@ These are all the endpoints of the API. For more information about each endpoint
 
 
 * [IPTC Media Topics classification](https://docs.expert.ai/nlapi/v1/reference/output/classification/)
+
 

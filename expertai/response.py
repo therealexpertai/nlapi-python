@@ -12,15 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from datetime import datetime
-import logging
-import os
-import re
-import requests
-
 from expertai import constants
-from expertai.authentication import ExpertAiAuth
-from expertai.errors import CredentialsError, ExpertAiRequestError
 
 
 class ExpertAiResponse:
@@ -28,52 +20,54 @@ class ExpertAiResponse:
         """
         :param response: the HTTP Response object (of type requests.Response)
         returned from the request
-        Status-code should not be accessed from the outside. The properties 
+        Status-code should not be accessed from the outside. The properties
         should be used instead.
         """
         self.http_response = response
-        self._status_code = self.http_response.status_code
-
-    def parse_data(self):
-        if not self.successful:
-            return None
-        return self.http_response.json()
 
     @property
     def status_code(self):
-        return self._status_code
-    
+        return self.http_response.status_code
+
+    @property
+    def status(self):
+        if self.status_code in constants.HTTP_ERRORS:
+            return constants.HTTP_ERRORS[self.status_code]
+        elif self.ok:
+            if self.json.get("success") == False or self.json.get("errors"):
+                return constants.BAD_REQUEST
+
+            return constants.SUCCESSFUL
+        return constants.UNKNOWN
+
     @property
     def json(self):
-        return self.parse_data()
+        if not self.ok:
+            return {}
+        return self.http_response.json()
 
     @property
     def invalid_status_code(self):
-        return self._status_code is None
+        return self.status_code is None
 
     @property
-    def successful(self):
-        return self._status_code == constants.HTTP_OK
-
-    @property
-    def unauthorized(self):
-        return self._status_code == constants.HTTP_UNAUTHORIZED
-
-    @property
-    def forbidden(self):
-        return self._status_code == constants.HTTP_FORBIDDEN
-
-    @property
-    def not_found(self):
-        return self._status_code == constants.HTTP_NOT_FOUND
+    def ok(self):
+        return self.status_code == constants.HTTP_SUCCESSFUL
 
     @property
     def error(self):
-        return self._status_code in constants.HTTP_ERRORS
+        return self.status_code in constants.HTTP_ERRORS
+
+    @property
+    def successful(self):
+        return self.status == constants.SUCCESSFUL
 
     @property
     def bad_request(self):
-        return False
+        return self.status == constants.BAD_REQUEST
 
-
-
+    def bad_request_message(self, json):
+        errors = json.get("errors", [])
+        return " ".join(
+            ["({code}, {message})".format(**err) for err in errors]
+        )

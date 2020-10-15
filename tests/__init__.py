@@ -13,24 +13,24 @@
 # limitations under the License.
 
 import os
-from unittest import TestCase, skip
-from unittest.mock import patch, MagicMock
+from unittest import TestCase
+from unittest.mock import MagicMock, patch
+
+import requests
 
 from expertai import constants
 
-import requests
 
 class BaseTestCase(TestCase):
     """"""
 
 
 class ExpertAiTestCase(BaseTestCase):
-
     def setUp(self):
-        requests_post_patched = patch.object(requests, 'post')
+        requests_post_patched = patch.object(requests, "post")
         self.patched_post = requests_post_patched.start()
 
-        requests_get_patched = patch.object(requests, 'get')
+        requests_get_patched = patch.object(requests, "get")
         self.patched_get = requests_get_patched.start()
 
         self.endpoint_path = "language/resource"
@@ -38,10 +38,13 @@ class ExpertAiTestCase(BaseTestCase):
         response = MagicMock(text="")
         self.patched_post.return_value = response
 
-        environment_variables_patch = patch.dict(os.environ, {
-            constants.USERNAME_ENV_VARIABLE: "user@eai",
-            constants.PASSWORD_ENV_VARIABLE: "pw",
-        })
+        environment_variables_patch = patch.dict(
+            os.environ,
+            {
+                constants.USERNAME_ENV_VARIABLE: "user@eai",
+                constants.PASSWORD_ENV_VARIABLE: "pw",
+            },
+        )
         environment_variables_patch.start()
 
         self.addCleanup(requests_get_patched.stop)

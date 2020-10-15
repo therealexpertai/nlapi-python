@@ -12,25 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from datetime import datetime
-import logging
-import requests
-
 from expertai import constants
 from expertai.errors import ParameterError
 
 
-INVALID_NAME_MESSAGE = "Invalid name"
-INVALID_VALUE_MESSAGE = "Invalid value"
-
-
 class ExpertAiValidation:
     """
-    For every new method, the patter is: [value_name]_value_is_correct
+    To be consistent, every new method added to verify a value should be
+    name according this pattern: [value_name]_value_is_correct
     """
-       
+
     def language_value_is_correct(self, language):
-        return language in constants.LANGUAGE_ISO_639_1_CODES
+        return language in constants.LANGUAGES.keys()
 
     def resource_value_is_correct(self, resource):
         return resource in constants.RESOURCES_NAMES
@@ -38,15 +31,16 @@ class ExpertAiValidation:
     def check_name(self, param_name):
         if param_name not in constants.PARAMETER_NAMES:
             raise ParameterError("{} - invalid name".format(param_name))
-    
+
     def check_value(self, param_name, value):
         method_name = "{}_value_is_correct".format(param_name)
         method = getattr(self, method_name)
         if not method(**{param_name: value}):
-            raise ParameterError("{} - invalid value: {}".format(param_name, value))
+            raise ParameterError(
+                "{} - invalid value: {}".format(param_name, value)
+            )
 
     def check_parameters(self, params):
         for p_name, p_value in params.items():
             self.check_name(p_name)
             self.check_value(p_name, p_value)
-

@@ -1,5 +1,6 @@
 */__pycache__/*
-lib/model/__pycache__/
+expertai/model/__pycache__/
+*/*/__pycache__/*
 
 build/
 dist/
