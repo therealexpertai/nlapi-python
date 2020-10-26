@@ -306,6 +306,3 @@ These are all the endpoints of the API. For more information about each endpoint
 
 
 * [IPTC Media Topics classification](https://docs.expert.ai/nlapi/v1/reference/output/classification/)
-
-
-...
