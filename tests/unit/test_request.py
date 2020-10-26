@@ -16,9 +16,9 @@ from unittest.mock import PropertyMock, patch
 
 import requests
 
-from expertai import constants
-from expertai.errors import ExpertAiRequestError
-from expertai.request import ExpertAiRequest
+from expertai.common import constants
+from expertai.common.errors import ExpertAiRequestError
+from expertai.cloud.request import ExpertAiRequest
 from tests import ExpertAiTestCase
 
 
@@ -36,14 +36,14 @@ class ExpertAiRequestTestCase(ExpertAiTestCase):
         )
 
         file_token_value = patch(
-            "expertai.authentication.ExpertAiAuth.fetch_token_value"
+            "expertai.common.authentication.ExpertAiAuth.fetch_token_value"
         )
         self.file_token_value = file_token_value.start()
         self.file_token_value.return_value = plain_txt_value
         self.addCleanup(file_token_value.stop)
 
     @patch(
-        "expertai.authentication.ExpertAiAuth.header",
+        "expertai.common.authentication.ExpertAiAuth.header",
         new_callable=PropertyMock,
     )
     def test_a_raw_request_is_generated_out_of_a_request_object(
@@ -59,7 +59,7 @@ class ExpertAiRequestTestCase(ExpertAiTestCase):
         self.assertEqual(method, self.patched_get)
         patched_header.assert_called_once_with()
 
-    @patch("expertai.request.ExpertAiRequest.setup_raw_request")
+    @patch("expertai.cloud.request.ExpertAiRequest.setup_raw_request")
     def test_the_send_method_is_invoked(self, patched_setup_raw_request):
         """
         ...then verify that the setup_raw_request method is called

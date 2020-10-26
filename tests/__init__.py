@@ -18,7 +18,7 @@ from unittest.mock import MagicMock, patch
 
 import requests
 
-from expertai import constants
+from expertai.v1 import constants
 
 
 class BaseTestCase(TestCase):

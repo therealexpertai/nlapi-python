@@ -19,7 +19,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="expertai-nlapi",
-    version="1.2.5",
+    version="2.0.0b1",
     author="Expert System S.p.A.",
     author_email="api.support@expert.ai",
     description="Python client for expert.ai Natural Language API",

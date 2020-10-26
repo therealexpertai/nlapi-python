@@ -14,9 +14,9 @@
 
 from unittest.mock import MagicMock, patch
 
-from expertai import constants
-from expertai.client import ExpertAiClient
-from expertai.errors import MissingParametersError
+from expertai.common import constants
+from expertai.cloud.client import ExpertAiClient
+from expertai.common.errors import MissingParametersError
 from tests import ExpertAiTestCase
 
 
@@ -27,7 +27,7 @@ class ExpertAiClientTestCase(ExpertAiTestCase):
         self.test_body = {"document": {"text": "text"}}
         self.test_endpoint_path = "endpoint/{language}/{resource}"
 
-    @patch("expertai.client.ExpertAiClient.get_method_name_for_endpoint")
+    @patch("expertai.cloud.client.ExpertAiClient.get_method_name_for_endpoint")
     def test_a_request_is_created(self, patched_get_method_name_for_endpoint):
         """
         ...then the proper HTTP method should be set
@@ -46,7 +46,7 @@ class ExpertAiClientTestCase(ExpertAiTestCase):
             self.endpoint_path
         )
 
-    @patch("expertai.validate.ExpertAiValidation.check_parameters")
+    @patch("expertai.cloud.validate.ExpertAiValidation.check_parameters")
     def test_a_request_is_verified(self, patched_check_parameters):
         """
         ...then check_parameters method should be called
@@ -59,7 +59,7 @@ class ExpertAiClientTestCase(ExpertAiTestCase):
             params={"language": "en"}
         )
 
-    @patch("expertai.validate.ExpertAiValidation.check_parameters")
+    @patch("expertai.cloud.validate.ExpertAiValidation.check_parameters")
     def test_parameters_are_not_required(self, patched_check_parameters):
         """
         ...then the check_parameters method should not be called
@@ -87,7 +87,7 @@ class ExpertAiClientTestCase(ExpertAiTestCase):
             ["language", "resource"],
         )
 
-    @patch("expertai.client.ExpertAiClient.verify_request")
+    @patch("expertai.cloud.client.ExpertAiClient.verify_request")
     def test_create_request_method_is_called(self, patched_verify_request):
         """
         ...then the verify_request() should also be invoked with the
@@ -104,7 +104,7 @@ class ExpertAiClientTestCase(ExpertAiTestCase):
             "resource_urlpath", params={"language": "en"},
         )
 
-    @patch("expertai.client.ObjectMapper")
+    @patch("expertai.cloud.client.ObjectMapper")
     def test_a_bad_request_is_received(self, patched_object_mapper):
         """
         ...then the ObjectMapper should not be called

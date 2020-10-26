@@ -14,8 +14,8 @@
 
 from unittest.mock import MagicMock
 
-from expertai import constants
-from expertai.response import ExpertAiResponse
+from expertai.common import constants
+from expertai.cloud.response import ExpertAiResponse
 from tests import ExpertAiTestCase
 
 

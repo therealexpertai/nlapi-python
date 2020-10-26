@@ -15,9 +15,9 @@
 import os
 from unittest.mock import MagicMock, patch
 
-from expertai import constants
-from expertai.authentication import ExpertAiAuth
-from expertai.errors import CredentialsError, ExpertAiRequestError
+from expertai.common import constants
+from expertai.common.authentication import ExpertAiAuth
+from expertai.common.errors import CredentialsError, ExpertAiRequestError
 from tests import ExpertAiTestCase
 
 
@@ -26,7 +26,7 @@ class ExpertAiAuthTestCase(ExpertAiTestCase):
         self.auth_class = ExpertAiAuth()
         super().setUp()
 
-    @patch("expertai.authentication.ExpertAiAuth.fetch_token_value")
+    @patch("expertai.common.authentication.ExpertAiAuth.fetch_token_value")
     def test_when_the_auth_header_property_is_read(
         self, patched_fetch_token_value
     ):
@@ -100,7 +100,7 @@ class ExpertAiAuthTestCase(ExpertAiTestCase):
         )
 
     @patch(
-        "expertai.authentication.ExpertAiAuth.token_is_valid",
+        "expertai.common.authentication.ExpertAiAuth.token_is_valid",
         side_effect=[False, True],
     )
     def test_token_is_not_valid(self, patched_token_is_valid):

@@ -14,8 +14,8 @@
 
 from unittest.mock import patch
 
-from expertai.errors import ParameterError
-from expertai.validate import ExpertAiValidation
+from expertai.common.errors import ParameterError
+from expertai.cloud.validate import ExpertAiValidation
 from tests import BaseTestCase
 
 
@@ -42,7 +42,7 @@ class ValidationTests(BaseTestCase):
             )
         )
 
-    @patch("expertai.validate.ExpertAiValidation.language_value_is_correct")
+    @patch("expertai.cloud.validate.ExpertAiValidation.language_value_is_correct")
     def test_the_parameter_to_be_validated_is_the_language(
         self, patched_method
     ):
@@ -52,7 +52,7 @@ class ValidationTests(BaseTestCase):
         self.validation_klass.check_value(param_name="language", value="it")
         patched_method.assert_called_once_with(language="it")
 
-    @patch("expertai.validate.ExpertAiValidation.resource_value_is_correct")
+    @patch("expertai.cloud.validate.ExpertAiValidation.resource_value_is_correct")
     def test_the_parameter_to_be_validated_is_the_resource(
         self, patched_method
     ):

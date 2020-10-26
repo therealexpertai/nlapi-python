@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from expertai.object_mapper import ObjectMapper
+from expertai.cloud.object_mapper import ObjectMapper
 from tests import BaseTestCase
 
 

@@ -14,8 +14,8 @@
 
 from unittest.mock import patch
 
-from expertai.errors import ObjectMapperError
-from expertai.object_mapper import ObjectMapper
+from expertai.common.errors import ObjectMapperError
+from expertai.cloud.object_mapper import ObjectMapper
 from tests import BaseTestCase
 
 
@@ -49,7 +49,7 @@ class ObjectMapperTestCase(BaseTestCase):
         }
         self.assertEqual(djson, expected_json)
 
-    @patch("expertai.object_mapper.DataModel")
+    @patch("expertai.cloud.object_mapper.DataModel")
     def test_response_json_is_read(self, mocked_class):
         """
         ...then verify that DataModel class is called
@@ -97,7 +97,7 @@ class ObjectMapperTestCase(BaseTestCase):
             "tokens",
         )
 
-    @patch("expertai.object_mapper.ObjectMapper.precheck_references")
+    @patch("expertai.cloud.object_mapper.ObjectMapper.precheck_references")
     def test_references_are_resolved_into_objects(
         self, patched_precheck_references
     ):

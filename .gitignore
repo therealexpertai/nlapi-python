@@ -1,7 +1,8 @@
 */__pycache__/*
-expertai/model/__pycache__/
 */*/__pycache__/*
+*/*/*/__pycache__/*
 
+.vscode/
 build/
 dist/
 *.egg-info/

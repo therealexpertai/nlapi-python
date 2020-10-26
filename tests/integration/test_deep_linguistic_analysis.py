@@ -14,16 +14,16 @@
 
 from unittest.mock import patch
 
-from expertai.object_mapper import ObjectMapper
+from expertai.cloud.object_mapper import ObjectMapper
 from tests import BaseTestCase
 
 
 class DeepLinguisticAnalysis(BaseTestCase):
-    @patch("expertai.model.data_model.Token")
-    @patch("expertai.model.data_model.Paragraph")
-    @patch("expertai.model.data_model.Phrase")
-    @patch("expertai.model.data_model.Knowledge")
-    @patch("expertai.model.data_model.Sentence")
+    @patch("expertai.common.model.data_model.Token")
+    @patch("expertai.common.model.data_model.Paragraph")
+    @patch("expertai.common.model.data_model.Phrase")
+    @patch("expertai.common.model.data_model.Knowledge")
+    @patch("expertai.common.model.data_model.Sentence")
     def test_the_response_is_passed_to_the_object_mapper(
         self,
         patched_sentence,

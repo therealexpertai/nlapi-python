@@ -14,29 +14,76 @@
 
 from unittest.mock import MagicMock
 
-from expertai.client import ExpertAiClient
+from expertai.cloud.client import ExpertAiClient
 from tests import ExpertAiTestCase
 
 
 class Contexts(ExpertAiTestCase):
-    def test_a_taxonomies_request_is_executed(self):
+    def test_a_context_request_is_executed(self):
         """
         ...then verify that whole flow works as expected
         """
         response_json = {
             "success": True,
-            "contexts": {
-                "standard": {
-                    "description": "Standard",
-                    "languages": [
-                        {"description": "English", "name": "en"},
-                        {"description": "German", "name": "de"},
-                        {"description": "Spanish", "name": "es"},
-                        {"description": "French", "name": "fr"},
-                        {"description": "Italian", "name": "it"},
+            "contexts": [
+                {
+                "description": "Standard context",
+                "languages": [
+                    {
+                    "analyses": [
+                        "disambiguation",
+                        "relevants",
+                        "entities",
+                        "sentiment",
+                        "relations"
                     ],
+                    "code": "en",
+                    "name": "English"
+                    },
+                    {
+                    "analyses": [
+                        "disambiguation",
+                        "relevants",
+                        "entities",
+                        "relations"
+                    ],
+                    "code": "es",
+                    "name": "Spanish"
+                    },
+                    {
+                    "analyses": [
+                        "disambiguation",
+                        "relevants",
+                        "entities",
+                        "relations"
+                    ],
+                    "code": "fr",
+                    "name": "French"
+                    },
+                    {
+                    "analyses": [
+                        "disambiguation",
+                        "relevants",
+                        "entities",
+                        "relations"
+                    ],
+                    "code": "de",
+                    "name": "German"
+                    },
+                    {
+                    "analyses": [
+                        "disambiguation",
+                        "relevants",
+                        "entities",
+                        "relations"
+                    ],
+                    "code": "it",
+                    "name": "Italian"
+                    }
+                ],
+                "name": "standard"
                 }
-            },
+            ]
         }
         response = MagicMock()
         response.status_code = 200
@@ -45,8 +92,7 @@ class Contexts(ExpertAiTestCase):
 
         self.patched_get.return_value = response
         client = ExpertAiClient()
-        dm = client.iptc_taxonomies()
-        self.assertEqual(dm.standard.description, "Standard")
-        self.assertEqual(
-            dm.standard.languages[4].get_language_by_description, "it"
-        )
+        dm = client.contexts()
+        self.assertEqual(dm.contexts[0].name, "standard")
+        self.assertEqual(dm.contexts[0].languages[4].code, "it")
+        self.assertEqual(dm.contexts[0].languages[3].analyses[2], "entities")

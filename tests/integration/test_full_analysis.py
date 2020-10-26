@@ -14,7 +14,7 @@
 
 from unittest.mock import MagicMock
 
-from expertai.client import ExpertAiClient
+from expertai.cloud.client import ExpertAiClient
 from tests import ExpertAiTestCase
 
 
