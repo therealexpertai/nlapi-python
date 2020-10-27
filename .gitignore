@@ -8,4 +8,4 @@ dist/
 *.egg-info/
 
 
-expertai/cloud/nlapi.http
+expertai/cloud/nlpi.http
