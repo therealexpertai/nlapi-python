@@ -177,10 +177,10 @@ for entity in document.entities:
     print (f'{entity.lemma:{20}} {entity.type_.key:{10}} {entity.type_.description:{10}}')
 ```
 
-    ENTITY               TYPE       TYPE_EXPLAINED
-    6,000,000 dollar     MON        Money     
-    Springfield          GEO        Administrative geographic areas
-    Facebook Inc.        COM        Businesses / companies
+    ENTITY               TYPE
+    6,000,000 dollar     MON        
+    Springfield          GEO        
+    Facebook Inc.        COM
     
 
 In addition to the entity type, the API provides some metadata from Linked Open Data sources such as WikiData and GeoNames.

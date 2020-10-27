@@ -13,7 +13,6 @@
 # limitations under the License.
 
 from expertai.common.errors import ETypeError, EValueError, MissingArgumentError
-from expertai.common.model.phrase_type import PhraseType
 from expertai.common.model.position import Position
 from expertai.common.model.token import Token
 
@@ -39,7 +38,7 @@ class Phrase(Position):
         if not (type or type_):
             raise MissingArgumentError("Missing required argument type")
 
-        self._type = PhraseType(key=type_ or type)
+        self._type = (type_ or type)
         self._tokens = []
 
         if not isinstance(tokens, list):

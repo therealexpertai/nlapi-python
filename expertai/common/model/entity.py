@@ -13,7 +13,6 @@
 # limitations under the License.
 
 from expertai.common.errors import ETypeError, EValueError, MissingArgumentError
-from expertai.common.model.entity_type import EntityType
 from expertai.common.model.position import Position
 
 class Attribute:
@@ -81,7 +80,7 @@ class Entity:
         if not (type or type_):
             raise MissingArgumentError("Missing required argument type")
 
-        self._type = EntityType(key=type_ or type)
+        self._type = (type_ or type)
         self._lemma = lemma
 
         if not isinstance(positions, list):

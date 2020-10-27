@@ -15,7 +15,6 @@
 from expertai.common.errors import ETypeError, EValueError
 from expertai.common.model.atom import Atom
 from expertai.common.model.dependency import Dependency
-from expertai.common.model.pos_tag import PosTag
 from expertai.common.model.position import Position
 from expertai.common.model.vsyncon import VSyncon
 
@@ -55,7 +54,7 @@ class Token(Position):
         self._syncon = syncon
         # by default if only one value is passed, it is considered
         # to be the key
-        self._pos = PosTag(key=pos)
+        self._pos = pos
         self._lemma = lemma
         self._atoms = []
         self._vsyn = None

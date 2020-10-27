@@ -302,22 +302,6 @@ class DataModelsTestCase(BaseTestCase):
             positions=[{}],
         )
 
-    def test_a_entitytype_object_is_initialised(self):
-        """
-        ...then key value is validated
-        """
-        self.assertRaises(EValueError, EntityType, key="a")
-
-    def test_a_entitytype_is_correctly_initialised(self):
-        """
-        ...then properties should return the expected values
-        """
-        entity_type = EntityType(key="ADR")
-        self.assertEqual(entity_type.key, "ADR")
-        self.assertEqual(
-            entity_type.description, ENTITY_TYPE_VALUES.get("ADR")
-        )
-
     def test_a_iptc_is_correctly_initialised(self):
         """
         ...then properties should return the expected values
@@ -442,34 +426,6 @@ class DataModelsTestCase(BaseTestCase):
         self.assertEqual(msyn.score, 13.3)
         self.assertEqual(msyn.lemma, "test")
 
-    def test_a_pos_tag_is_initialised_with_the_description(self):
-        """
-        ...then the correct key should be returned
-        """
-        pos_tag = PosTag(description="verb")
-        self.assertEqual(pos_tag.key_from_description, "VERB")
-
-    def test_a_pos_tag_is_initialised_with_the_key(self):
-        """
-        ...then the correct description should be resolved
-        """
-        pos = PosTag(key="SYM")
-        self.assertEqual(pos.description_from_key, "symbol")
-
-    def test_a_phrase_type_is_initialised_with_the_description(self):
-        """
-        ...then the correct key should be returned
-        """
-        phrase_type = PhraseType(description="Blank lines")
-        self.assertEqual(phrase_type.key_from_description, "CR")
-
-    def test_a_phrase_type_is_initialised_with_the_key(self):
-        """
-        ...then the correct description should be resolved
-        """
-        phrase_type = PhraseType(key="NP")
-        self.assertEqual(phrase_type.description_from_key, "Noun Phrase")
-
     def test_a_phrase_is_initialised(self):
         """
         ...then also nested classes should be correctly initialised
@@ -511,7 +467,6 @@ class DataModelsTestCase(BaseTestCase):
         self.assertEqual(phrase.start, 30)
         self.assertEqual(phrase.end, 100)
         self.assertEqual(phrase.tokens[0].sentence, 0)
-        self.assertEqual(phrase.type_.description_from_key, "Noun Phrase")
 
     def test_a_property_is_initialised(self):
         """
@@ -598,7 +553,6 @@ class DataModelsTestCase(BaseTestCase):
         self.assertEqual(token.start, 74)
         self.assertEqual(token.end, 83)
         self.assertEqual(token.syncon, 62653)
-        self.assertEqual(token.pos.description_from_key, "punctuation")
         self.assertEqual(token.lemma, "long time")
         self.assertEqual(token.dependency.head, 7)
         self.assertEqual(token.dependency.label, "nmod")
@@ -638,8 +592,6 @@ class DataModelsTestCase(BaseTestCase):
 
         self.assertEqual(token.start, 74)
         self.assertEqual(token.end, 83)
-        self.assertEqual(token.pos.description_from_key, "noun")
-        self.assertIsNone(token.pos.key_from_description)
         self.assertEqual(token.lemma, "long time")
         self.assertEqual(token.dependency.head, 7)
         self.assertEqual(token.dependency.label, "nmod")
@@ -673,20 +625,6 @@ class DataModelsTestCase(BaseTestCase):
             phrase=4,
             atoms=[],
         )
-
-    def test_a_token_type_is_initialised_by_description(self):
-        """
-        ...then verify that the name is correctly returned
-        """
-        token_type = TokenType(description="Particle")
-        self.assertEqual(token_type.key_from_description, "PRT")
-
-    def test_a_token_type_is_initialised_by_key(self):
-        """
-        ...then verify that the description is correctly returned
-        """
-        token_type = TokenType(key="PRO")
-        self.assertEqual(token_type.description, "Pronoun")
 
     def test_a_topic_object_is_correctly_initialised(self):
         """

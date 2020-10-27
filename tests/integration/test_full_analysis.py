@@ -88,4 +88,4 @@ class FullAnalysis(ExpertAiTestCase):
 
         # two POST requests are made, one for the token and one for analysis
         self.assertEqual(self.patched_post.call_count, 2)
-        self.assertEqual(data_model.sentences[0].phrases[0].type_.key, "PP")
+        self.assertEqual(data_model.sentences[0].phrases[0].type_, "PP")
