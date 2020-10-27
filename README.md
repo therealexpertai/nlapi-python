@@ -4,7 +4,7 @@
 # expert.ai Natural Language API for Python
 
 
-Python client for the [expert.ai Natural Language API](https://developer.expert.ai/). Leverage Natural Language understanding from your Python apps.
+Python client for the [expert.ai Natural Language API](https://docs.expert.ai/nlapi/v2). Leverage Natural Language understanding from your Python apps.
 
  
 
@@ -162,7 +162,7 @@ for token in document.tokens:
     
 
 ### Named Entities
-Going a step beyond tokens, *named entities* add another layer of context.  Named entities are accessible through the `entities` object.
+Going a step beyond tokens, *named entities* add another layer of context.  Named entities are obtained with the `entities` analysis.
 
 
 ```python
@@ -171,10 +171,10 @@ document = client.specific_resource_analysis(
     params={'language': language, 'resource': 'entities'})
 
 
-print (f'{"ENTITY":{20}} {"TYPE":{10}} {"TYPE_EXPLAINED":{10}}')
+print (f'{"ENTITY":{40}} {"TYPE":{10}})
        
 for entity in document.entities:
-    print (f'{entity.lemma:{20}} {entity.type_.key:{10}} {entity.type_.description:{10}}')
+    print (f'{entity.lemma:{40}} {entity.type_{10}}')
 ```
 
     ENTITY               TYPE
@@ -212,7 +212,7 @@ for entry in document.knowledge:
 Springfield has been recognized as [Q28515](https://www.wikidata.org/wiki/Q28515) on Wikidata, that is the Q-id for Springfield, IL (i.e.not for Springfield in Vermont o in California)
 
 ### Key Elements
-*Key elements* are identified from the document as main sentences, main keywords, main lemmas and relevant topics; let's focus on the main lemmas of the document; each lemma is provided with a relevance score.
+*Key elements* are obtained with the `relevants` analysis and identified from the document as main sentences, main keywords, main lemmas and relevant topics; let's focus on the main lemmas of the document; each lemma is provided with a relevance score.
 
 
 ```python
@@ -250,7 +250,9 @@ import matplotlib.pyplot as plt
 %matplotlib inline
 plt.style.use('ggplot')
 
-document = client.iptc_media_topics_classification(body={"document": {"text": text}}, params={'language': language})
+taxonomy='iptc'
+
+document = client.classification(body={"document": {"text": text}}, params={'taxonomy': taxonomy, 'language': language})
 
 categories = []
 scores = []
@@ -288,23 +290,21 @@ Good job! You're an expert in the expert.ai community! :clap: :tada:
 Check out other language SDKs available on our [Github page](https://github.com/therealexpertai).
 
 
-## Available endpoints
+## Capabilites
 
-These are all the endpoints of the API. For more information about each endpoint, check out the [API documentation](https://docs.expert.ai/nlapi/v1/).
-
+These are all the analysis and classification capabilities of the API.
 
 ### Document Analysis
 
+* [Full document analysys](https://docs.expert.ai/nlapi/v2/guide/full-analysis/)
+* Partial analyses:
 
-* [Deep linguistic analysis](https://docs.expert.ai/nlapi/v1/reference/output/linguistic-analysis/)	
-* [Keyphrase extraction](https://docs.expert.ai/nlapi/v1/reference/output/keyphrase-extraction/)	
-* [Named entities recognition](https://docs.expert.ai/nlapi/v1/reference/output/entity-recognition/)
-* [Full document analysis](https://docs.expert.ai/nlapi/v1/reference/output/full-analysis/)
-
+    * [Deep linguistic analysis (text subdivision, part-of-speech tagging, morphological analysis, lemmatization, syntactic analysis, semantic analysis)](https://docs.expert.ai/nlapi/v2/guide/linguistic-analysis/)
+    * [Keyphrase extraction](https://docs.expert.ai/nlapi/v2/guide/keyphrase-extraction/)
+    * [Named entities recognition](https://docs.expert.ai/nlapi/v2/guide/entity-recognition/)
+    * [Relation extraction](https://docs.expert.ai/nlapi/v2/guide/relation-extraction/)
+    * [Sentiment analysis](https://docs.expert.ai/nlapi/v2/guide/sentiment-analysis/)
 
 ### Document Classification
 
-
-* [IPTC Media Topics classification](https://docs.expert.ai/nlapi/v1/reference/output/classification/)
-
-
+* [IPTC Media Topics and geographic classification](https://docs.expert.ai/nlapi/v2/guide/classification/)
