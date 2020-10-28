@@ -57,7 +57,7 @@ Currently, the API supports five languages, i.e. English, French, Spanish, Itali
 
 
 ```python
-from expertai.cloud.client import ExpertAiClient
+from expertai.nlapi.cloud.client import ExpertAiClient
 client = ExpertAiClient()
 ```
 
