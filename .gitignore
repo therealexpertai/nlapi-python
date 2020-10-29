@@ -1,11 +1,12 @@
 */__pycache__/*
 */*/__pycache__/*
 */*/*/__pycache__/*
+*/*/*/*/__pycache__/*
 
 .vscode/
 build/
 dist/
 *.egg-info/
 
-
+expertai/test_edge.py
 expertai/cloud/nlpi.http

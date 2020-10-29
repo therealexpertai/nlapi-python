@@ -13,8 +13,11 @@
 # limitations under the License.
 
 BASE_API_URL = "https://nlapi.expert.ai/v2"
+#BASE_EDGE_URL = "https://edge.expert.ai"
+BASE_EDGE_URL = "http://127.0.0.1:8090"
 
-OAUTH2_TOKEN_URL = "https://developer.expert.ai/oauth2/token"
+#OAUTH2_TOKEN_URL = "https://developer.expert.ai/oauth2/token"
+OAUTH2_TOKEN_URL = "https://test-developer.expert.ai/oauth2/token"
 
 USERNAME_ENV_VARIABLE = "EAI_USERNAME"
 PASSWORD_ENV_VARIABLE = "EAI_PASSWORD"
@@ -28,6 +31,7 @@ TK_TIMESTAMP_FILENAME = ".timestamp"
 FULL_ANALYSIS_PATH = "analyze/{context}/{language}"
 ANALYSIS_PATH = "analyze/{context}/{language}/{resource}"
 CLASSIFICATION_PATH = "categorize/{taxonomy}/{language}"
+EXECUTION_KEY_PATH = "edge/key/{footprint}"
 
 CONTEXTS_PATH = "contexts"
 TAXONOMIES_PATH = "taxonomies"
@@ -42,6 +46,7 @@ URLS_AND_METHODS = (
     (CONTEXTS_PATH, "GET"),
     (TAXONOMIES_PATH, "GET"),
     (TAXONOMY_PATH, "GET"),
+    (EXECUTION_KEY_PATH, "GET"),        
 )
 
 HTTP_GET = "GET"
@@ -64,7 +69,7 @@ UNKNOWN = "UNKNOWN_STATUS"
 SUCCESSFUL = "SUCCESSFUL"
 BAD_REQUEST = "BAD REQUEST"
 
-PARAMETER_NAMES = ["language", "resource", "context", "taxonomy"]
+PARAMETER_NAMES = ["language", "resource", "context", "taxonomy", "footprint"]
 
 LANGUAGES = {
     "de": "German",
