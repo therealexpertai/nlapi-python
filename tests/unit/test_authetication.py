@@ -122,3 +122,4 @@ class ExpertAiAuthTestCase(ExpertAiTestCase):
         """
         with patch.dict(os.environ, {constants.TOKEN_ENV_VARIABLE: ""}):
             self.assertFalse(self.auth_class.token_is_valid())
+
