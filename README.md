@@ -14,7 +14,7 @@ Python client for the [expert.ai Natural Language API](https://docs.expert.ai/nl
 You can use pip to install the library:
 
 ```bash
-$ pip -U install expertai-nlapi
+$ pip install expertai-nlapi
 ```
 
 
