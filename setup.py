@@ -19,7 +19,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="expertai-nlapi",
-    version="2.0.1b4",
+    version="2.0.1",
     author="Expert System S.p.A.",
     author_email="api.support@expert.ai",
     description="Python client for expert.ai Natural Language API",
@@ -30,8 +30,8 @@ setup(
     packages=find_namespace_packages(include=['expertai.nlapi.*']),
     install_requires=["requests"],
     classifiers=[
-		#'Development Status :: 5 - Production/Stable',        
-        "Development Status :: 4 - Beta",
+		'Development Status :: 5 - Production/Stable',        
+        #"Development Status :: 4 - Beta",
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
