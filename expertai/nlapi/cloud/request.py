@@ -14,9 +14,9 @@
 
 import requests
 
-from nlapi.common import constants
-from nlapi.common.authentication import ExpertAiAuth
-from nlapi.common.errors import ExpertAiRequestError
+from expertai.nlapi.common import constants
+from expertai.nlapi.common.authentication import ExpertAiAuth
+from expertai.nlapi.common.errors import ExpertAiRequestError
 
 
 class ExpertAiRequest:

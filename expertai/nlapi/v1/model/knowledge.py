@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from nlapi.v1.errors import ETypeError, EValueError
-from nlapi.v1.model.eproperty import Property
+from expertai.nlapi.v1.errors import ETypeError, EValueError
+from expertai.nlapi.v1.model.eproperty import Property
 
 
 class Knowledge:

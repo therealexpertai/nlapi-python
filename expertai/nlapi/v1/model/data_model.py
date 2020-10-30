@@ -12,20 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from nlapi.v1.model.category import Category
-from nlapi.v1.model.entity import Entity
-from nlapi.v1.model.iptc import Iptc
-from nlapi.v1.model.knowledge import Knowledge
-from nlapi.v1.model.main_lemma import MainLemma
-from nlapi.v1.model.main_phrase import MainPhrase
-from nlapi.v1.model.main_sentence import MainSentence
-from nlapi.v1.model.main_syncon import MainSyncon
-from nlapi.v1.model.paragraph import Paragraph
-from nlapi.v1.model.phrase import Phrase
-from nlapi.v1.model.sentence import Sentence
-from nlapi.v1.model.standard import Standard
-from nlapi.v1.model.token import Token
-from nlapi.v1.model.topic import Topic
+from expertai.nlapi.v1.model.category import Category
+from expertai.nlapi.v1.model.entity import Entity
+from expertai.nlapi.v1.model.iptc import Iptc
+from expertai.nlapi.v1.model.knowledge import Knowledge
+from expertai.nlapi.v1.model.main_lemma import MainLemma
+from expertai.nlapi.v1.model.main_phrase import MainPhrase
+from expertai.nlapi.v1.model.main_sentence import MainSentence
+from expertai.nlapi.v1.model.main_syncon import MainSyncon
+from expertai.nlapi.v1.model.paragraph import Paragraph
+from expertai.nlapi.v1.model.phrase import Phrase
+from expertai.nlapi.v1.model.sentence import Sentence
+from expertai.nlapi.v1.model.standard import Standard
+from expertai.nlapi.v1.model.token import Token
+from expertai.nlapi.v1.model.topic import Topic
 
 
 class DataModel:

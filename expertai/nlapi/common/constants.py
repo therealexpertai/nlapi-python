@@ -45,8 +45,12 @@ URLS_AND_METHODS = (
     (CLASSIFICATION_PATH, "POST"),
     (CONTEXTS_PATH, "GET"),
     (TAXONOMIES_PATH, "GET"),
+<<<<<<< HEAD
     (TAXONOMY_PATH, "GET"),
     (EXECUTION_KEY_PATH, "GET"),        
+=======
+    (TAXONOMY_PATH, "GET")
+>>>>>>> master
 )
 
 HTTP_GET = "GET"

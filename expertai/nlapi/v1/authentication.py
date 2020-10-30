@@ -16,8 +16,8 @@ import os
 
 import requests
 
-from nlapi.v1 import constants
-from nlapi.v1.errors import CredentialsError, ExpertAiRequestError
+from expertai.nlapi.v1 import constants
+from expertai.nlapi.v1.errors import CredentialsError, ExpertAiRequestError
 
 
 class ExpertAiAuth:

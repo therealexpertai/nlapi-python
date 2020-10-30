@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from nlapi.v1 import constants
+from expertai.nlapi.v1 import constants
 
 
 class ExpertAiResponse:

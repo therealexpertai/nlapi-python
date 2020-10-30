@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from nlapi.common.errors import ETypeError, EValueError
-from nlapi.common.model.language import Language
+from expertai.nlapi.common.errors import ETypeError, EValueError
+from expertai.nlapi.common.model.language import Language
 
 
 class Standard:

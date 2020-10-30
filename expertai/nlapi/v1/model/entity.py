@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from nlapi.v1.errors import ETypeError, EValueError, MissingArgumentError
-from nlapi.v1.model.entity_type import EntityType
-from nlapi.v1.model.position import Position
+from expertai.nlapi.v1.errors import ETypeError, EValueError, MissingArgumentError
+from expertai.nlapi.v1.model.entity_type import EntityType
+from expertai.nlapi.v1.model.position import Position
 
 
 class Entity:
