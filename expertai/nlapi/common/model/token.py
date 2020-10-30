@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from nlapi.common.errors import ETypeError, EValueError
-from nlapi.common.model.atom import Atom
-from nlapi.common.model.dependency import Dependency
-from nlapi.common.model.position import Position
-from nlapi.common.model.vsyncon import VSyncon
+from expertai.nlapi.common.errors import ETypeError, EValueError
+from expertai.nlapi.common.model.atom import Atom
+from expertai.nlapi.common.model.dependency import Dependency
+from expertai.nlapi.common.model.position import Position
+from expertai.nlapi.common.model.vsyncon import VSyncon
 
 
 class Token(Position):

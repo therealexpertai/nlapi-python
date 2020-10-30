@@ -14,12 +14,12 @@
 
 import re
 
-from nlapi.common import constants
-from nlapi.common.errors import ExpertAiRequestError, MissingParametersError
-from nlapi.cloud.object_mapper import ObjectMapper
-from nlapi.cloud.request import ExpertAiRequest
-from nlapi.cloud.response import ExpertAiResponse
-from nlapi.cloud.validate import ExpertAiValidation
+from expertai.nlapi.common import constants
+from expertai.nlapi.common.errors import ExpertAiRequestError, MissingParametersError
+from expertai.nlapi.cloud.object_mapper import ObjectMapper
+from expertai.nlapi.cloud.request import ExpertAiRequest
+from expertai.nlapi.cloud.response import ExpertAiResponse
+from expertai.nlapi.cloud.validate import ExpertAiValidation
 
 
 class ExpertAiClient:

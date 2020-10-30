@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from nlapi.common.errors import ETypeError, EValueError
+from expertai.nlapi.common.errors import ETypeError, EValueError
 
 class Verb:
     def __init__(self, text, lemma, syncon, phrase, relevance, type=None, type_=None):

@@ -14,8 +14,8 @@
 
 from re import search as re_search
 
-from nlapi.v1.errors import ObjectMapperError
-from nlapi.v1.model import DataModel
+from expertai.nlapi.v1.errors import ObjectMapperError
+from expertai.nlapi.v1.model import DataModel
 
 
 class ObjectMapper:

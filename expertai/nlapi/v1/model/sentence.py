@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from nlapi.v1.errors import ETypeError, EValueError
-from nlapi.v1.model.phrase import Phrase
-from nlapi.v1.model.position import Position
+from expertai.nlapi.v1.errors import ETypeError, EValueError
+from expertai.nlapi.v1.model.phrase import Phrase
+from expertai.nlapi.v1.model.position import Position
 
 
 class Sentence(Position):

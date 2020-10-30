@@ -12,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from nlapi.v1.errors import ETypeError, EValueError, MissingArgumentError
-from nlapi.v1.model.phrase_type import PhraseType
-from nlapi.v1.model.position import Position
-from nlapi.v1.model.token import Token
+from expertai.nlapi.v1.errors import ETypeError, EValueError, MissingArgumentError
+from expertai.nlapi.v1.model.phrase_type import PhraseType
+from expertai.nlapi.v1.model.position import Position
+from expertai.nlapi.v1.model.token import Token
 
 
 class Phrase(Position):

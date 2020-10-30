@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from nlapi.common.errors import ETypeError, EValueError, MissingArgumentError
-from nlapi.common.model.position import Position
+from expertai.nlapi.common.errors import ETypeError, EValueError, MissingArgumentError
+from expertai.nlapi.common.model.position import Position
 
 
 class Category:

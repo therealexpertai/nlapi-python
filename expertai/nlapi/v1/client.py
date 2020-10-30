@@ -14,12 +14,12 @@
 
 import re
 
-from nlapi.v1 import constants
-from nlapi.v1.errors import ExpertAiRequestError, MissingParametersError
-from nlapi.v1.object_mapper import ObjectMapper
-from nlapi.v1.request import ExpertAiRequest
-from nlapi.v1.response import ExpertAiResponse
-from nlapi.v1.validate import ExpertAiValidation
+from expertai.nlapi.v1 import constants
+from expertai.nlapi.v1.errors import ExpertAiRequestError, MissingParametersError
+from expertai.nlapi.v1.object_mapper import ObjectMapper
+from expertai.nlapi.v1.request import ExpertAiRequest
+from expertai.nlapi.v1.response import ExpertAiResponse
+from expertai.nlapi.v1.validate import ExpertAiValidation
 
 
 class ExpertAiClient:
