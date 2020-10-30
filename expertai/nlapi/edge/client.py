@@ -17,12 +17,12 @@ import hashlib
 import json
 import requests
 
-from nlapi.common import constants
-from nlapi.common.errors import ExpertAiRequestError, MissingParametersError
-from nlapi.edge.object_mapper import ObjectMapper
-from nlapi.edge.request import ExpertAiRequest
-from nlapi.edge.response import ExpertAiResponse
-from nlapi.edge.validate import ExpertAiValidation
+from expertai.nlapi.common import constants
+from expertai.nlapi.common.errors import ExpertAiRequestError, MissingParametersError
+from expertai.nlapi.edge.object_mapper import ObjectMapper
+from expertai.nlapi.edge.request import ExpertAiRequest
+from expertai.nlapi.edge.response import ExpertAiResponse
+from expertai.nlapi.edge.validate import ExpertAiValidation
 
 def MD5_hash(s):
     m = hashlib.md5()

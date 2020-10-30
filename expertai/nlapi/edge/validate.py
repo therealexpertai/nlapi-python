@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from nlapi.common import constants
-from nlapi.common.errors import ParameterError
+from expertai.nlapi.common import constants
+from expertai.nlapi.common.errors import ParameterError
 
 
 class ExpertAiValidation:
