@@ -1,3 +1,4 @@
+__pycache__/*
 */__pycache__/*
 */*/__pycache__/*
 */*/*/__pycache__/*
@@ -10,4 +11,5 @@ dist/
 *.egg-info/
 
 
+test_edge.py
 expertai/cloud/nlpi.http
