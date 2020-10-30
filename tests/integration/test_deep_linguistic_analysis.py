@@ -101,3 +101,4 @@ class DeepLinguisticAnalysis(BaseTestCase):
         self.assertEqual(patched_phrase.call_count, 3)
         self.assertEqual(patched_paragraph.call_count, 1)
         self.assertEqual(patched_token.call_count, 1)
+
