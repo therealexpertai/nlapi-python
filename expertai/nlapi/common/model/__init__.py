@@ -42,6 +42,8 @@ from expertai.nlapi.common.model.sentiment import Items
 from expertai.nlapi.common.model.context import Context
 from expertai.nlapi.common.model.taxonomy import TaxonomyList
 from expertai.nlapi.common.model.taxonomy import Taxonomy
+from expertai.nlapi.common.model.template import Template
+from expertai.nlapi.common.model.template import Field
 
 __all__ = [
     "Atom",
@@ -73,5 +75,7 @@ __all__ = [
     "Items",    
     "Context",
     "TaxonomyList",
-    "Taxonomy"
+    "Taxonomy",
+    "Template",
+    "Field"       
 ]

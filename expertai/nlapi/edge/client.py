@@ -116,3 +116,42 @@ class ExpertAiClient:
         response = self.response_class(self.post_request(host, '/api/analyze', json.dumps(body), header))
         return self.process_response(response)
 
+    def taxonomy(self, host):
+        # extract text
+        params = self.set_param("taxonomy")
+
+        # call cloud server to get execution key
+        request = self.create_request(
+            endpoint_path=constants.EXECUTION_KEY_PATH,
+            params=params)
+        response = request.send()
+        if response.status_code != 200:
+            # to do !!!
+            return {}
+        ekey = response.content
+        
+        # call internal server with execution key for analysis
+        body = { "info" : "taxonomy" } 
+        header = {'Content-Type' : 'application/json', 'execution-key' : ekey}    
+        response = self.response_class(self.post_request(host, '/api/model', json.dumps(body), header))
+        return self.process_response(response)
+
+    def templates(self, host):
+        # extract text
+        params = self.set_param("templates")
+
+        # call cloud server to get execution key
+        request = self.create_request(
+            endpoint_path=constants.EXECUTION_KEY_PATH,
+            params=params)
+        response = request.send()
+        if response.status_code != 200:
+            # to do !!!
+            return {}
+        ekey = response.content
+        
+        # call internal server with execution key for analysis
+        body = { "info" : "templates" }
+        header = {'Content-Type' : 'application/json', 'execution-key' : ekey}    
+        response = self.response_class(self.post_request(host, '/api/model', json.dumps(body), header))
+        return self.process_response(response)

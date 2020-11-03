@@ -31,7 +31,8 @@ from expertai.nlapi.common.model.topic import Topic
 from expertai.nlapi.common.model.context import Context
 from expertai.nlapi.common.model.taxonomy import TaxonomyList
 from expertai.nlapi.common.model.taxonomy import Taxonomy
-
+from expertai.nlapi.common.model.template import Template
+from expertai.nlapi.common.model.template import Field
 
 class DataModel:
     """
@@ -71,6 +72,7 @@ class DataModel:
         standard={},
         contexts=[],
         taxonomies=[],
+        templates=[],        
         data=[]
     ):
         self._content = content
@@ -95,6 +97,7 @@ class DataModel:
         self._contexts = [Context(**ctx) for ctx in contexts]
         self._taxonomies = [TaxonomyList(**txn) for txn in taxonomies]
         self._taxonomy = [Taxonomy(**dtx) for dtx in data]
+        self._templates = [Template(**tpl) for tpl in templates]
 
     @property
     def content(self):
@@ -183,3 +186,9 @@ class DataModel:
     @property
     def taxonomy(self):
         return self._taxonomy                
+
+    @property
+    def templates(self):
+        return self._templates                
+
+        
