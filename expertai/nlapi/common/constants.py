@@ -13,11 +13,9 @@
 # limitations under the License.
 
 BASE_API_URL = "https://nlapi.expert.ai/v2"
-#BASE_EDGE_URL = "https://edge.expert.ai"
-BASE_EDGE_URL = "http://127.0.0.1:8090"
+BASE_EDGE_URL = "https://edgeapi.expert.ai"
 
-#OAUTH2_TOKEN_URL = "https://developer.expert.ai/oauth2/token"
-OAUTH2_TOKEN_URL = "https://test-developer.expert.ai/oauth2/token"
+OAUTH2_TOKEN_URL = "https://developer.expert.ai/oauth2/token"
 
 USERNAME_ENV_VARIABLE = "EAI_USERNAME"
 PASSWORD_ENV_VARIABLE = "EAI_PASSWORD"

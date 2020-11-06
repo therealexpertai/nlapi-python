@@ -97,8 +97,6 @@ class ObjectMapper:
                 data = { "data" : response_json.get("data") }
         elif "taxonomies" in response_json:
             data = { "taxonomies" : response_json.get("taxonomies") }            
-        elif "templates" in response_json:
-            data = { "templates" : response_json.get("templates") }                        
         elif "contexts" in response_json:
             data = { "contexts" : response_json.get("contexts") }
         else:
