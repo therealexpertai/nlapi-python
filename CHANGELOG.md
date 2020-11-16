@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+## [2.1.0] - 2020-11-17
+
+* Added support for [Edge NL API](https://docs.expert.ai/edgenlapi/latest/)
+
 ## [2.0.1] - 2020-10-29
 
 * Added support for: sentiment and relations analysis
