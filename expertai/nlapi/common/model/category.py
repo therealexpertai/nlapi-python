@@ -42,9 +42,12 @@ class Category:
         Again, to mitigate this name clash with the reserved keyword
         the property was suffixed with the underscore.
         """
-        if not (id or id_):
+        if id is None and id_ is None:
             raise MissingArgumentError("Missing required argument: id")
-        self._id = id_ or id
+        if id is not None:
+            self._id = id
+        else:
+            self._id = id_        
 
         self._namespace = namespace
         self._label = label
