@@ -31,9 +31,12 @@ class VSyncon:
         the property was suffixed with the underscore.
         """
         self._parent = parent
-        if not (id or id_):
+        if id is None and id_ is None:
             raise MissingArgumentError("Missing required argument: id")
-        self._id = id_ or id
+        if id is not None:
+            self._id = id
+        else:
+            self._id = id_        
 
     @property
     def id_(self):
