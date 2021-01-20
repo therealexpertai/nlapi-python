@@ -199,10 +199,10 @@ document = client.named_entity_recognition(text)
 Printing results:
 
 ```python
-print (f'{"ENTITY":{40}} {"TYPE":{10}})
+print (f'{"ENTITY":{40}} {"TYPE":{10}}')
        
 for entity in document.entities:
-    print (f'{entity.lemma:{40}} {entity.type_{10}}')
+    print (f'{entity.lemma:{40}} {entity.type_:{10}}')
 ```
 
     ENTITY               TYPE
@@ -290,7 +290,7 @@ document = client.sentiment(text)
 Printing results:
 
 ```python
-print("sentiment:", response.sentiment.overall)
+print("sentiment:", document.sentiment.overall)
 ```
 
 ### Relations
@@ -344,7 +344,7 @@ plt.style.use('ggplot')
 
 taxonomy='iptc'
 
-document = client.classification(body={"document": {"text": text}}, params={'language': language})
+document = client.classification(body={"document": {"text": text}}, params={'taxonomy': taxonomy,'language': language})
 
 categories = []
 scores = []
