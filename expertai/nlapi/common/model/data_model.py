@@ -75,7 +75,8 @@ class DataModel:
         taxonomies=[],
         templates=[],        
         extractions=[],                
-        data=[]
+        data=[],
+        extra_data={}
     ):
         self._content = content
         self._language = language
@@ -101,6 +102,7 @@ class DataModel:
         self._taxonomy = [Taxonomy(**dtx) for dtx in data]
         self._templates = [Template(**tpl) for tpl in templates]
         self._extractions = [Extraction(**ext) for ext in extractions]
+        self._extra_data = extra_data
 
     @property
     def content(self):
@@ -196,4 +198,8 @@ class DataModel:
 
     @property
     def extractions(self):
-        return self._extractions        
+        return self._extractions  
+    
+    @property
+    def extra_data(self):
+        return self._extra_data
