@@ -393,7 +393,7 @@ These are all the analysis and classification capabilities of the Natural Langua
 
 - Natural Language API
     - Document analysis
-        - [Full analysys](https://docs.expert.ai/nlapi/latest/guide/full-analysis/)
+        - [Full analysis](https://docs.expert.ai/nlapi/latest/guide/full-analysis/)
         - Partial analyses:
             - [Deep linguistic analysis (text subdivision, part-of-speech tagging, morphological analysis, lemmatization, syntactic analysis, semantic analysis)](https://docs.expert.ai/nlapi/latest/guide/linguistic-analysis/)
             - [Keyphrase extraction](https://docs.expert.ai/nlapi/latest/guide/keyphrase-extraction/)
@@ -405,7 +405,7 @@ These are all the analysis and classification capabilities of the Natural Langua
 - Edge NL API
     - Document analysis:
         - [Full document analysis](https://docs.expert.ai/edgenlapi/latest/guide/full-analysis/)
-        - Partial analyses:
+        - Partial analysis:
             - [Deep linguistic analysis (text subdivision, part-of-speech tagging, morphological analysis, lemmatization, syntactic analysis, semantic analysis)](https://docs.expert.ai/edgenlapi/latest/guide/linguistic-analysis/)
             - [Keyphrase extraction](https://docs.expert.ai/nlapi/v2/guide/keyphrase-extraction/)
             - [Named entities recognition](https://docs.expert.ai/edgenlapi/latest/guide/entity-recognition/)
