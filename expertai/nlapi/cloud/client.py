@@ -26,6 +26,7 @@ class ExpertAiClient:
     def __init__(self):
         self.response_class = ExpertAiResponse
         self._endpoint_path = ""
+        self._response = None
 
     def urlpath_keywords(self, endpoint_path):
         return re.findall(r"\{(\w+)\}", endpoint_path)
@@ -67,7 +68,14 @@ class ExpertAiClient:
             body=body,
         )
 
-    def process_response(self, response):
+    def get_json_response(self):
+        if self._response:
+            return self._response.json
+        else:
+            return {}
+
+    def process_response(self, response ):
+        self._response = response
         if not response.successful:
             raise ExpertAiRequestError(
                 "Response status code: {}".format(response.status_code)
@@ -83,6 +91,17 @@ class ExpertAiClient:
             params["context"] = "standard"
         request = self.create_request(
             endpoint_path=constants.FULL_ANALYSIS_PATH,
+            params=params,
+            body=body,
+        )
+        response = self.response_class(response=request.send())
+        return self.process_response(response)
+
+    def detect(self, params, body):
+        if "detector" not in params:
+            params["detector"] = "pii"
+        request = self.create_request(
+            endpoint_path=constants.DETECT_PATH,
             params=params,
             body=body,
         )
@@ -119,6 +138,10 @@ class ExpertAiClient:
 
     def contexts(self):
         request = self.create_request(endpoint_path=constants.CONTEXTS_PATH)
+        response = self.response_class(response=request.send())
+        return self.process_response(response)
+    def detectors(self):
+        request = self.create_request(endpoint_path=constants.DETECTORS_PATH)
         response = self.response_class(response=request.send())
         return self.process_response(response)
 

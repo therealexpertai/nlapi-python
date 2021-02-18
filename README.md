@@ -325,6 +325,39 @@ for rel in document.relations:
       print("Relation:", r.relation, "Lemma:", r.lemma )
 ```
 
+### Detector
+
+*Detector* can be used to perform a deep linguistic analysis of a given text in order to extract particular types of information from it. For example, with *PII Detector* (PII stands for Personal Identifiable Informtion) we are able to detect and extract information (such as names, dates, addresses, telephone numbers, etc.) that could be considered "sensitive".
+
+```
+text='Longtime TFS News reporter Marcus Smith died unexpectedly Monday at the age of 60'
+```
+
+- Natural Language API:
+```python
+# cloud API
+document = client.detect(
+		body={"document": {"text": text}}, 
+		params={'language': language,'detector':'pii'})
+```
+
+- Edge NL API:
+```python
+# Edge API
+document = client.detect(text)
+```
+
+Printing results:
+
+```python
+for extraction in document.extractions:
+  print("Template:", extraction.template)
+  for field in extraction.fields:
+    print("field: ", field.name," value: " , field.value)
+    for position in field.positions :
+        print("start: ", position.start, "end: " , position.end)
+```
+
 ### Classification
 Let's see how to classify documents according to the [**IPTC Media Topics Taxonomy**](https://iptc.org/standards/media-topics/) provided by the Natural Language API; we're going to use a text that has more textual information and then we'll use the matplot lib to show a bar chart with the categorization results.
 

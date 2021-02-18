@@ -27,10 +27,10 @@ class Token(Position):
         syncon,
         pos,
         lemma,
-        dependency,
         paragraph,
         sentence,
         phrase,
+        dependency=None,
         atoms=[],
         morphology=None,
         vsyn=None,
@@ -59,11 +59,9 @@ class Token(Position):
         self._atoms = []
         self._vsyn = None
 
-        if not isinstance(dependency, dict):
-            raise ETypeError(dependency, dict)
-        if not dependency:
-            raise EValueError(dependency, "Token.dependency")
-        self._dependency = Dependency(**dependency)
+        self._dependency = None
+        if dependency:
+            self._dependency = Dependency(**dependency)
 
         self._morphology = morphology
         self._paragraph = paragraph

@@ -25,6 +25,7 @@ class ExpertAiResponse:
         """
         self.http_response = response
 
+
     @property
     def status_code(self):
         return self.http_response.status_code
