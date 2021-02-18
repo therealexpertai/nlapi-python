@@ -106,7 +106,6 @@ class DataModel:
         self._extra_data = extra_data
         self._detectors = [Context(**ctx) for ctx in detectors]
 
-
     @property
     def content(self):
         return self._content
