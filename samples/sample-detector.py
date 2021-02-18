@@ -1,7 +1,7 @@
 from expertai.nlapi.cloud.client import ExpertAiClient
 client = ExpertAiClient()
 
-text = "     Matteo Renzi lives in Rome"
+text = "     John Smith lives in Rome"
 language= 'en'
 
 output = client.detect(body={"document": {"text": text}}, params={'language': language,'detector':'pii'})
