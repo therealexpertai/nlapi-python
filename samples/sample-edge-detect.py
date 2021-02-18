@@ -2,7 +2,7 @@ import json
 from expertai.nlapi.edge.client import ExpertAiClient
 client = ExpertAiClient()
 
-text = "Matteo Renzi lives in Rome"
+text = "John Smith lives in Rome"
 output = client.detect(text)
 
 #print(client.get_json_response())
