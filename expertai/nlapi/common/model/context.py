@@ -34,10 +34,11 @@ class ContextLanguage:
         return self._analyses        
 
 class Context:
-    def __init__(self, name, description, languages):
+    def __init__(self, name, description, languages, contract=None):
         self._name = name
         self._description = description
         self._languages = []
+        self._contract = contract
 
         if not isinstance(languages, list):
             raise ETypeError(languages, list)
@@ -61,3 +62,7 @@ class Context:
     @property
     def languages(self):
         return self._languages
+
+    @property
+    def contract(self):
+        return self._contract

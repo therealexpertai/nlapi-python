@@ -27,11 +27,13 @@ TK_TIMESTAMP_FILENAME = ".timestamp"
 
 # No leading slash
 FULL_ANALYSIS_PATH = "analyze/{context}/{language}"
+DETECT_PATH = "detect/{detector}/{language}"
 ANALYSIS_PATH = "analyze/{context}/{language}/{resource}"
 CLASSIFICATION_PATH = "categorize/{taxonomy}/{language}"
 EXECUTION_KEY_PATH = "edge/key/{footprint}"
 
 CONTEXTS_PATH = "contexts"
+DETECTORS_PATH = "detectors"
 TAXONOMIES_PATH = "taxonomies"
 TAXONOMY_PATH = "taxonomies/{taxonomy}/{language}"
 
@@ -39,9 +41,11 @@ CONTENT_TYPE_HEADER = {"Content-Type": "application/json"}
 
 URLS_AND_METHODS = (
     (FULL_ANALYSIS_PATH, "POST"),
+    (DETECT_PATH, "POST"),
     (ANALYSIS_PATH, "POST"),
     (CLASSIFICATION_PATH, "POST"),
     (CONTEXTS_PATH, "GET"),
+    (DETECTORS_PATH, "GET"),
     (TAXONOMIES_PATH, "GET"),
     (TAXONOMY_PATH, "GET"),
     (EXECUTION_KEY_PATH, "GET"),        
@@ -67,7 +71,7 @@ UNKNOWN = "UNKNOWN_STATUS"
 SUCCESSFUL = "SUCCESSFUL"
 BAD_REQUEST = "BAD REQUEST"
 
-PARAMETER_NAMES = ["language", "resource", "context", "taxonomy", "footprint"]
+PARAMETER_NAMES = ["language", "resource", "context", "taxonomy", "footprint","detector"]
 
 LANGUAGES = {
     "de": "German",
@@ -75,6 +79,9 @@ LANGUAGES = {
     "es": "Spanish",
     "fr": "French",
     "it": "Italian",
+}
+DETECTORS = {
+    "pii": "Protected Information"
 }
 
 RESOURCES_NAMES = ["disambiguation", "relevants", "entities", "relations", "sentiment"]

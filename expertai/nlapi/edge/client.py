@@ -34,7 +34,8 @@ class ExpertAiClient:
         self.response_class = ExpertAiResponse
         self._endpoint_path = ""
         self._host = "127.0.0.1"
-        self._port = "6699"        
+        self._port = "6699"
+        self._response = None
 
     def _analysis(self, text, options):
         host = self._host + ":" + self._port
@@ -43,7 +44,7 @@ class ExpertAiClient:
         
         # call internal server with execution key for analysis
         body = {'document': {'text' : text}, 'options': options }
-        header = {'Content-Type' : 'application/json', 'execution-key' : ekey}    
+        header = {'Content-Type' : 'application/json', 'execution-key' : ekey}
         response = self.response_class(self.post_request(host, '/api/analyze', json.dumps(body), header))
         return self.process_response(response)
 
@@ -104,6 +105,7 @@ class ExpertAiClient:
         )
 
     def process_response(self, response):
+        self._response = response
         if not response.successful:
             raise ExpertAiRequestError(
                 "Response status code: {}".format(response.status_code)
@@ -113,7 +115,11 @@ class ExpertAiClient:
                 response.bad_request_message(response.json)
             )
         return ObjectMapper().read_json(response.json)
-
+    def get_json_response(self):
+        if self._response:
+            return self._response.json
+        else:
+            return {}
     def post_request(self, host, uri, data, header={'Content-Type': 'application/json'}):
         curi = 'http://' + host + uri
         response = requests.post(curi, data=data, headers=header)    
@@ -174,6 +180,10 @@ class ExpertAiClient:
         header = {'Content-Type' : 'application/json' }    
         response = self.response_class(self.post_request(host, '/api/model', json.dumps(body), header))
         return self.process_response(response)
+
+    def detect(self,text):
+        options=self.set_options([ "disambiguation", "entities",'extractions' ], [ "knowledge","syncpos","extradata"])
+        return self._analysis(text, options)
 
     def templates(self):
         host = self._host + ":" + self._port

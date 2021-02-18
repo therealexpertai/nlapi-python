@@ -96,6 +96,8 @@ class ObjectMapper:
             data = { "taxonomies" : response_json.get("taxonomies") }            
         elif "contexts" in response_json:
             data = { "contexts" : response_json.get("contexts") }
+        elif "detectors" in response_json:
+            data = { "detectors" : response_json.get("detectors") }
         else:
             response_data = response_json.get("data")
             cdata = self.convert_json_keys(response_data)
