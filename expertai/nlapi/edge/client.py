@@ -181,7 +181,7 @@ class ExpertAiClient:
         response = self.response_class(self.post_request(host, '/api/model', json.dumps(body), header))
         return self.process_response(response)
 
-    def detect(self,text):
+    def detection(self,text):
         options=self.set_options([ "disambiguation", "entities",'extractions' ], [ "knowledge","syncpos","extradata"])
         return self._analysis(text, options)
 

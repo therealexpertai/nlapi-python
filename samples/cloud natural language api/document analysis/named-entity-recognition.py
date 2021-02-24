@@ -1,3 +1,5 @@
+# Demonstrates the named entity recognition capability of the expert.ai (Cloud based) Natural Language API performed by the 'entities' resource
+
 from expertai.nlapi.cloud.client import ExpertAiClient
 client = ExpertAiClient()
 

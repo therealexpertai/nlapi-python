@@ -1,3 +1,5 @@
+# Demonstrates the relation extraction capability of the expert.ai (Cloud based) Natural Language API performed by the 'relations' resource
+
 from expertai.nlapi.cloud.client import ExpertAiClient
 client = ExpertAiClient()
 

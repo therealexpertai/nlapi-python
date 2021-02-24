@@ -1,8 +1,10 @@
+# Demonstrates the use of the self-documentation resource 'taxonomy' of the expert.ai (Cloud based) Natural Language API for the GeoTax document classification taxonomy
+
 from expertai.nlapi.cloud.client import ExpertAiClient
 
 def printCategory(level, category):
-    tabs = "\t" * level
-    print(tabs, category.id, "(", category.label, ")")
+    tabs = "    " * level
+    print("{}{} ({})".format(tabs, category.id, category.label))
     for nestedCategory in category.categories:
         printCategory(level + 1, nestedCategory)
 
@@ -13,7 +15,7 @@ language='en'
 
 output = client.taxonomy(params={'taxonomy': taxonomy, 'language': language})
 
-print("geotax categories' tree:")
+print("geotax taxonomy category tree:\n")
 
 for category in output.taxonomy[0].categories:
-    printCategory(1, category)
+    printCategory(0, category)

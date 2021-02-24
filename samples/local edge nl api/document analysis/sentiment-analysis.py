@@ -1,13 +1,11 @@
-from expertai.nlapi.cloud.client import ExpertAiClient
+# Demonstrates the sentiment analysis capability of the expert.ai (local) Edge NL API performed by the 'sentiment' resource wrapped in the `sentiment` method of the client.
+
+from expertai.nlapi.edge.client import ExpertAiClient
 client = ExpertAiClient()
 
 text = "Michael Jordan was one of the best basketball players of all time. Scoring was Jordan's stand-out skill, but he still holds a defensive NBA record, with eight steals in a half." 
-language= 'en'
 
-output = client.specific_resource_analysis(
-    body={"document": {"text": text}}, 
-    params={'language': language, 'resource': 'sentiment'
-})
+output = client.sentiment(text)
 
 # Output overall sentiment
 

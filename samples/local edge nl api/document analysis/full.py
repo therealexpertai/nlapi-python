@@ -1,11 +1,10 @@
-from expertai.nlapi.cloud.client import ExpertAiClient
+from expertai.nlapi.edge.client import ExpertAiClient
 client = ExpertAiClient()
+client.set_host('localhost', 6670)
 
-text = "Michael Jordan was one of the best basketball players of all time. Scoring was Jordan's stand-out skill, but he still holds a defensive NBA record, with eight steals in a half.'" 
-language= 'en'
+text = "Michael Jordan was one of the best basketball players of all time. Scoring was Jordan's stand-out skill, but he still holds a defensive NBA record, with eight steals in a half." 
 
-output = client.full_analysis(body={"document": {"text": text}}, params={'language': language})
-
+output = client.full_analysis(text)
 
 # Output arrays size
 

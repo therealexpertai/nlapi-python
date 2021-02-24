@@ -1,3 +1,5 @@
+# Demonstrates the keyphrase extraction capability of the expert.ai (Cloud based) Natural Language API performed by the 'relevants' resource
+
 from expertai.nlapi.cloud.client import ExpertAiClient
 client = ExpertAiClient()
 

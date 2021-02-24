@@ -1,16 +1,163 @@
 <img style="float: right;" src="https://docs.expert.ai/logo.png" width="150px">
 
-# expert.ai Natural Language API for Python
+# expert.ai Natural Language APIs for Python
 
 Python client for the expert.ai Natural Language APIs adds Natural Language understanding capabilities to your Python apps.
 The client can use either the Cloud based [Natural Language API](https://docs.expert.ai/nlapi/latest/) or a local instance of [Edge NL API](https://docs.expert.ai/edgenlapi/latest/).
 
-## Installation (development)
+## APIs capabilites
 
-You can use `pip` to install the library:
+Make reference to the [Natural Language API](https://docs.expert.ai/nlapi/latest/guide/) and [Edge NL API](https://docs.expert.ai/edgenlapi/latest/guide/) documentation to know more about the APIs capabilities.
+
+Here is a side-by-side comparison of the two APIs:
+
+Capability | Ntaural Language API | Edge NL API
+--- | --- | ---
+Where does it run? | In the Cloud, shared by all users | On user's PC
+Document analysis: Deep linguistic analysis | YES | YES
+Document analysis: Keyphrase extraction | YES | YES
+Document analysis: Named entities recognition | YES | YES
+Document analysis: Relation extraction | YES | YES
+Document analysis: Sentiment analysis | YES | YES
+Document analysis, full (the sum of all of the above in a single operation) | YES | YES
+Document classification: IPTC Media topics | YES | NO
+Document classification: GeoTax | YES | NO
+Document classification: custom taxonomy | NO | YES*
+Personally Identifiable Information (PII) detection | YES | NO
+Information extraction | NO | YES*
+Document size limit? | YES (<= 10KB)| NO
+Document number limit? | NO | YES (2500 distinct documents per month, any number and type of analyses per document, when using the free tier)
+Characters limit? | YES (<= 10 million characters per month when using the free tier) | NO
+
+\* Available only for custom text intelligence engines created with [Studio](https://docs.expert.ai/studio/latest/)
+
+## Installation
+
+Use `pip` to install the client library:
 
 ```bash
-$ pip install expertai-nlapi
+pip install expertai-nlapi
+```
+
+## Usage
+
+### Authorization
+
+Expert.ai Natural Language APIs are free to use, ideally forever, with the limitations specified in the table above.  
+You need an expert.ai developer account to use the APIs and you can get one for free registering on the expert.ai [developer portal](https://developer.expert.ai).  
+If you need to exceed the free tier usage limits, subscribe a payment plan from inside the developer portal.
+
+The Python client code expects your developer account credentials to be specified as environment variables:
+ 
+- Linux:
+```bash
+export EAI_USERNAME=YOUR_USER
+export EAI_PASSWORD=YOUR_PASSWORD
+```
+
+- Windows:
+```bash
+SET EAI_USERNAME=YOUR_USER
+SET EAI_PASSWORD=YOUR_PASSWORD
+```
+
+`YOUR_USER` is the email address you specyfied during registration.
+
+You can also define credentials inside your code:
+
+```python
+import os
+os.environ["EAI_USERNAME"] = 'your@account.email'
+os.environ["EAI_PASSWORD"] = 'yourpwd'
+```
+
+### Create the client
+
+The next thing to do inside your code is importing the client section of the library and instantiating the client based on the API you want to use.
+
+- To use the Cloud based Natural Language API:
+```python
+from expertai.nlapi.cloud.client import ExpertAiClient
+client = ExpertAiClient()
+```
+
+- To use a local instance of Edge NL API:
+```python
+from expertai.nlapi.edge.client import ExpertAiClient
+client = ExpertAiClient()
+```
+
+### Access capabilities and self-documentation resources
+
+In the `samples` directory of the package you can find ready-to-run scripts showing how to access all API capabilities for English texts and API self-documentation resources.  
+Scripts are listed and described in the tables below.
+
+### (Cloud) Natural Language API
+
+Capability | Sample
+--- | ---
+Document analysis, `standard` context, **full analysis** | `/cloud natural language api/document analysis/full.py`
+Document analysis, `standard` context, sub-analysis: **Deep linguistic analysis** | `/cloud natural language api/document analysis/deep-linguistic-analysis.py`
+Document analysis, `standard` context, sub-analysis: **Keyphrase extraction** | `/cloud natural language api/document analysis/keyphrase-extraction.py`
+Document analysis, `standard` context, sub-analysis: **Named entity recognition** | `/cloud natural language api/document analysis/named-entity-recognition.py`
+Document analysis, `standard` context, sub-analysis: **Relation extraction** | `/cloud natural language api/document analysis/relation-extraction.py`
+Document analysis, `standard` context, sub-analysis: **Sentiment analysis** | `/cloud natural language api/document analysis/sentiment-analysis.py`
+Document analysis, self-documemtation esources: list of the available **contexts** | `/cloud natural language api/document analysis/contexts.py`
+Document classification with **`iptc`** taxonomy | `/cloud natural language api/document classification/iptc.py`
+Document classification with **`geotax`** taxonomy | `/cloud natural language api/document classification/geotax.py`
+Document classification, self-documentation resources: list of available taxonomies | `/cloud natural language api/document classification/taxonomies.py`
+Document classification, self-documentation resources: category tree of the `iptc` taxonomy | `/cloud natural language api/document classification/category-tree-iptc.py`
+Document classification, self-documentation resources: category tree of the `geotax` taxonomy | `/cloud natural language api/document classification/category-tree-geotax.py`
+Information detection with **`pii`** detector | `/cloud natural language api/information detection/pii.py`
+Information detection, self-documentation resources: list of available detectors | `/cloud natural language api/information detection/detectors.py`
+
+### (Local) Edge NL API for English
+
+Capability | Sample
+--- | ---
+Document analysis, **full analysis** | `/local edge nl api/document analysis/full.py`
+Document analysis, sub-analysis: **Deep linguistic analysis** | `/local edge nl api/document analysis/deep-linguistic-analysis.py`
+Document analysis, sub-analysis: **Keyphrase extraction** | `/local edge nl api/document analysis/keyphrase-extraction.py`
+Document analysis, sub-analysis: **Named entity recognition** | `/local edge nl api/document analysis/named-entity-recognition.py`
+Document analysis, sub-analysis: **Relation extraction** | `/local edge nl api/document analysis/relation-extraction.py`
+Document analysis, sub-analysis: **Sentiment analysis** | `/local edge nl api/document analysis/sentiment-analysis.py`
+
+### Changing the language
+
+The Natural Language API is capable of processing texts of various languages.
+You can use self-documentations resources like `contexts` and `taxonomies`&mdash;look for the corresponding ready-to-run scripts in the first of the two tables above&mdash;to determine if a functionality is available for a given language.  
+If it's available, specify the `language` parameter in your code, for example:
+
+```python
+text = "Michael Jordan è stato uno dei migliori giocatori di pallacanestro di tutti i tempi. Fare canestro è stata la capacità in cui Jordan spiccava, ma ancora detiene un record NBA di gioco difensivo, con otto palle rubate in metà partita."
+language= 'it'
+
+output = client.specific_resource_analysis(
+    body={"document": {"text": text}}, 
+    params={'language': language, 'resource': 'disambiguation'
+})
+```
+
+See also the documentation pages about [contexts](https://docs.expert.ai/nlapi/latest/guide/contexts-and-kg/) and [taxonomies](https://docs.expert.ai/nlapi/latest/guide/taxonomies/).
+
+Edge NL API can also process texts of different languages, but in this case you have to download from the developer portal and launch on your PC the package corresponding to the language you are interested in.
+
+### Change Edge NL API host and port
+
+If you need to run your client application on a computer and the Edge NL API on another or if you need Edge NL API to listen on a TCP port other than the default (which is 6699), you can use the `set_host` method of the Edge NL API client to specify the host and the port, for example:
+
+```python
+from expertai.nlapi.edge.client import ExpertAiClient
+client = ExpertAiClient()
+client.set_host('my_edge_server', 6699)
+```
+
+Or, if you continue to use the API on the local computer, but you changed the port in the Edge NL API startup batch file:
+
+```python
+from expertai.nlapi.edge.client import ExpertAiClient
+client = ExpertAiClient()
+client.set_host('localhost', 6700)
 ```
 
 ## Installation (contributor)
@@ -29,63 +176,15 @@ $ pip install -r requirements-dev.txt
 >$ source expertai/bin/activate
 >```
 
-## Usage
+## More examples of document analysis
 
-The Python client code expects expert.ai developer account credentials to be available as environment variables:
- 
-- Linux:
-```bash
-export EAI_USERNAME=YOUR_USER
-export EAI_PASSWORD=YOUR_PASSWORD
-```
+### Start with deep linguistic analysis
 
-- Windows:
-```bash
-SET EAI_USERNAME=YOUR_USER
-SET EAI_PASSWORD=YOUR_PASSWORD
-```
-
-You can also define them inside your code:
-
-```python
-import os
-os.environ["EAI_USERNAME"] = 'your@account.email'
-os.environ["EAI_PASSWORD"] = 'yourpwd'
-```
-
-If you don't have an account, sign up on the [developer portal](https://developer.expert.ai).
-
-The next thing to do is instantiating the client:
-
-- To use Natural Language API:
-```python
-from expertai.nlapi.cloud.client import ExpertAiClient
-client = ExpertAiClient()
-```
-
-- To use the local Edge NL API:
-```python
-from expertai.nlapi.edge.client import ExpertAiClient
-client = ExpertAiClient()
-```
-
-Then, set the text and the language:
-
-```python
-text = 'Facebook is looking at buying an American startup for $6 million based in Springfield, IL .' 
-language= 'en'
-```
-
-If you use Edge NL API, the language must match that of your service. If you are doing document analysis, check the availability of specific capabilities for the language [here](https://docs.expert.ai/nlapi/latest/guide/contexts-and-kg/).  
-If you are using the Cloud NL API out-of-the-box classification, check the availability of the taxonomy for the language [here](https://docs.expert.ai/nlapi/latest/guide/taxonomies/).
-
-### Sample analysis
-
-To perform the [deep linguistic analysis](https://docs.expert.ai/nlapi/latest/guide/linguistic-analysis/) of the text:
+To perform the [deep linguistic analysis](https://docs.expert.ai/nlapi/latest/guide/linguistic-analysis/) of a text:
 
 - Natural Language API:
 ```python
-document = client.specific_resource_analysis(
+output = client.specific_resource_analysis(
     body={"document": {"text": text}}, 
     params={'language': language, 'resource': 'disambiguation'
 })
@@ -93,17 +192,17 @@ document = client.specific_resource_analysis(
 
 - Edge NL API:
 ```python
-document = client.deep_linguistic_analysis(text)
+output = client.deep_linguistic_analysis(text)
 ```
 
-### Tokenization & Lemmatization
+### Then examine tokenization and lemmatization...
 
-Lemmatization looks beyond word reduction, and considers a language's full vocabulary to apply a *morphological analysis* to words. The lemma of 'was' is 'be' and the lemma of 'mice' is 'mouse'. Further, the lemma of 'meeting' might be 'meet' or 'meeting' depending on its use in a sentence.
+Lemmatization looks beyond word reduction, using a language's full vocabulary to apply a *morphological analysis* to words. The lemma of 'was' is 'be' and the lemma of 'mice' is 'mouse'. Further, the lemma of 'meeting' might be 'meet' or 'meeting' depending on its use in a sentence.
 
 ```python
 print (f'{"TOKEN":{20}} {"LEMMA":{8}}')
 
-for token in document.tokens:
+for token in output.tokens:
     print (f'{text[token.start:token.end]:{20}} {token.lemma:{8}}')
 ```
 
@@ -123,7 +222,7 @@ for token in document.tokens:
     .                    .       
     
 
-###  Part of Speech
+###  Part of Speech (PoS) tagging...
 
 Analysis determines the part-of-speech of tokens. PoS labels are from the [Universal Dependencies](https://universaldependencies.org/) framework.
 
@@ -131,7 +230,7 @@ Analysis determines the part-of-speech of tokens. PoS labels are from the [Unive
 ```python
 print (f'{"TOKEN":{18}} {"PoS":{4}}')
 
-for token in document.tokens:
+for token in output.tokens:
     print (f'{text[token.start:token.end]:{18}} {token.pos:{4}}  ' )
 ```
 
@@ -151,7 +250,7 @@ for token in document.tokens:
     .                  PUNCT   
      
 
-### Dependency parsing information
+### and dependency parsing information
 
 The analysis returns the dependency parsing information assigned to each token, using the Universal Dependencies framework as well.
 
@@ -159,7 +258,7 @@ The analysis returns the dependency parsing information assigned to each token, 
 ```python
 print (f'{"TOKEN":{18}} {"Dependency label":{8}}')
 
-for token in document.tokens:
+for token in output.tokens:
     print (f'{text[token.start:token.end]:{18}} {token.dependency.label:{4}} ' )
 ```
 
@@ -179,21 +278,20 @@ for token in document.tokens:
     .                  punct 
     
 
-### Named Entities
+### Named entity recognition
 
-Going a step beyond linguistic analysis, *named entities* add another layer of context.  Named entities are recognized by the `entities` analysis.
+Going a step beyond linguistic analysis, *named entities* add another layer of context.  Named entities are recognized by the `entities` sub-analysis.
 
 - Natural Language API:
 ```python
-document = client.specific_resource_analysis(
+output = client.specific_resource_analysis(
     body={"document": {"text": text}}, 
     params={'language': language, 'resource': 'entities'})
 ```
 
 - Edge NL API:
 ```python
-# Edge API
-document = client.named_entity_recognition(text)
+output = client.named_entity_recognition(text)
 ```
 
 Printing results:
@@ -201,7 +299,7 @@ Printing results:
 ```python
 print (f'{"ENTITY":{40}} {"TYPE":{10}}')
        
-for entity in document.entities:
+for entity in output.entities:
     print (f'{entity.lemma:{40}} {entity.type_:{10}}')
 ```
 
@@ -216,7 +314,7 @@ For example, you can get the open data connected with the entity `Springfield, I
 
 
 ```python
-print(document.entities[1].lemma)
+print(output.entities[1].lemma)
 ```
 
     Springfield
@@ -224,7 +322,7 @@ print(document.entities[1].lemma)
 
 
 ```python
-for entry in document.knowledge:
+for entry in output.knowledge:
     if (entry.syncon == document.entities[1].syncon):
             for prop in entry.properties:
                 print (f'{prop.type_:{12}} {prop.value:{30}}')
@@ -239,9 +337,11 @@ for entry in document.knowledge:
 
 Springfield has been recognized as [Q28515](https://www.wikidata.org/wiki/Q28515) on Wikidata, that is the Q-id for Springfield, IL (i.e.not for Springfield in Vermont o in California)
 
-### Key Elements
+### Key elements
 
-*Key elements* are obtained with the `relevants` analysis and identified from the document as main sentences, main concepts (called "syncons"), main lemmas and relevant topics; let's focus on the main lemmas of the document; each lemma is provided with a relevance score.
+**Key elements**, the result of keyphrase extraction, are obtained with the `relevants` sub-analysis and identified from the document as main sentences, main concepts (called "syncons"), main lemmas and relevant Knowledge Graph topics.
+
+Let's focus on the main lemmas of the document; each lemma is provided with a relevance score.
 
 - Natural Language API:
 ```python
@@ -267,9 +367,9 @@ for mainlemma in document.main_lemmas:
     startup               40.4
     Springfield             15
     
-### Sentiment
+### Sentiment analysis
 
-*Sentiment* is obtained with the `sentiment` analysis and it determines how positive or negative the tone of the text is.
+**Sentiment** is obtained with the `sentiment` sub-analysis and expresses the **polarity**&mdash;positive or negative&mdash;and the intensity of the tone of the text is.
 
 ```
 text='Today is a good day. I love to go to mountain.'
@@ -295,7 +395,7 @@ print("sentiment:", document.sentiment.overall)
 
 ### Relations
 
-*Relations* are obtained with the `relations` analysis that labels concepts expressed in the text with their semantic role.
+**Relations** are obtained with the `relations` sub-analysis that labels concepts expressed in the text with their semantic role with respect to the verb they are connected to.
 
 
 ```
@@ -325,41 +425,9 @@ for rel in document.relations:
       print("Relation:", r.relation, "Lemma:", r.lemma )
 ```
 
-### Detector
+### More examples of document classification
 
-*Detector* can be used to perform a deep linguistic analysis of a given text in order to extract particular types of information from it. For example, with *PII Detector* (PII stands for Personal Identifiable Informtion) we are able to detect and extract information (such as names, dates, addresses, telephone numbers, etc.) that could be considered "sensitive".
-
-```
-text='Longtime TFS News reporter Marcus Smith died unexpectedly Monday at the age of 60'
-```
-
-- Natural Language API:
-```python
-# cloud API
-document = client.detect(
-		body={"document": {"text": text}}, 
-		params={'language': language,'detector':'pii'})
-```
-
-- Edge NL API:
-```python
-# Edge API
-document = client.detect(text)
-```
-
-Printing results:
-
-```python
-for extraction in document.extractions:
-  print("Template:", extraction.template)
-  for field in extraction.fields:
-    print("field: ", field.name," value: " , field.value)
-    for position in field.positions :
-        print("start: ", position.start, "end: " , position.end)
-```
-
-### Classification
-Let's see how to classify documents according to the [**IPTC Media Topics Taxonomy**](https://iptc.org/standards/media-topics/) provided by the Natural Language API; we're going to use a text that has more textual information and then we'll use the matplot lib to show a bar chart with the categorization results.
+Let's see how to classify documents according to the [**IPTC Media Topics Taxonomy**](https://iptc.org/standards/media-topics/) provided by the Natural Language API; then we'll use the matplot lib to display categorization results as a bar chart.
 
 
 ```python
@@ -405,45 +473,46 @@ plt.show()
 
 ![png](https://raw.githubusercontent.com/therealexpertai/nlapi-python/master/chart_output.png)  
 
-Standard Edge NL API packages dont't provide document classification, but you can create your own document classification service using [expert.ai Studio](https://docs.expert.ai/studio/latest).
+Basic Edge NL API packages dont't provide document classification, but you can create your own text intelligence engine performing document classification by using [expert.ai Studio](https://docs.expert.ai/studio/latest).
 
-To request classification to the Edge NL API simply use:
+To request classification to a custom instance of the Edge NL API simply use:
 
 ```python
 document = client.classification(text)
 ```
+
 Results structure is the same as for the Natural Language API.
- 
+
+
+## Information detection
+
+**Information detection** leverages deep linguistic analysis to extract particular types of information from the text.
+
+For example, the Personal Identifiable Informtion (PII) detector of the Natural Language API extract personal information such as people names, dates, addresses, telephone numbers, etc. that could be considered "sensitive".
+
+```
+text='Longtime TFS News reporter Marcus Smith died unexpectedly Monday at the age of 60'
+```
+
+- Natural Language API:
+```python
+document = client.detect(
+		body={"document": {"text": text}}, 
+		params={'language': language,'detector':'pii'})
+
+for extraction in document.extractions:
+  print("Template:", extraction.template)
+  for field in extraction.fields:
+    print("field: ", field.name," value: " , field.value)
+    for position in field.positions :
+        print("start: ", position.start, "end: " , position.end)
+```
+
+Basic Edge NL API packages dont't provide information detection, but you can create your own text intelligence engine performing document classification by using [expert.ai Studio](https://docs.expert.ai/studio/latest).
+
+## ...and if you made it this far...
 
 Good job! You're an expert in the expert.ai community! :clap: :tada:
 
 Check out other language SDKs available on our [Github page](https://github.com/therealexpertai).
-
-
-## Capabilites
-
-These are all the analysis and classification capabilities of the Natural Language APIs.
-
-- Natural Language API
-    - Document analysis
-        - [Full analysis](https://docs.expert.ai/nlapi/latest/guide/full-analysis/)
-        - Partial analyses:
-            - [Deep linguistic analysis (text subdivision, part-of-speech tagging, morphological analysis, lemmatization, syntactic analysis, semantic analysis)](https://docs.expert.ai/nlapi/latest/guide/linguistic-analysis/)
-            - [Keyphrase extraction](https://docs.expert.ai/nlapi/latest/guide/keyphrase-extraction/)
-            - [Named entities recognition](https://docs.expert.ai/nlapi/latest/guide/entity-recognition/)
-            - [Relation extraction](https://docs.expert.ai/nlapi/latest/guide/relation-extraction/)
-            - [Sentiment analysis](https://docs.expert.ai/nlapi/latest/guide/sentiment-analysis/)
-    - Document Classification
-        - [IPTC Media Topics and geographic taxonomies](https://docs.expert.ai/nlapi/latest/guide/taxonomies/)
-- Edge NL API
-    - Document analysis:
-        - [Full document analysis](https://docs.expert.ai/edgenlapi/latest/guide/full-analysis/)
-        - Partial analysis:
-            - [Deep linguistic analysis (text subdivision, part-of-speech tagging, morphological analysis, lemmatization, syntactic analysis, semantic analysis)](https://docs.expert.ai/edgenlapi/latest/guide/linguistic-analysis/)
-            - [Keyphrase extraction](https://docs.expert.ai/nlapi/v2/guide/keyphrase-extraction/)
-            - [Named entities recognition](https://docs.expert.ai/edgenlapi/latest/guide/entity-recognition/)
-            - [Relation extraction](https://docs.expert.ai/edgenlapi/latest/guide/relation-extraction/)
-            - [Sentiment analysis](https://docs.expert.ai/edgenlapi/latest/guide/sentiment-analysis/)
-    - [Document classification](https://docs.expert.ai/edgenlapi/latest/guide/classification/)
-    - [Information extraction](https://docs.expert.ai/edgenlapi/latest/guide/extraction/)
 

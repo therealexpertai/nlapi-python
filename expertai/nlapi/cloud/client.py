@@ -97,11 +97,9 @@ class ExpertAiClient:
         response = self.response_class(response=request.send())
         return self.process_response(response)
 
-    def detect(self, params, body):
-        if "detector" not in params:
-            params["detector"] = "pii"
+    def detection(self, params, body):
         request = self.create_request(
-            endpoint_path=constants.DETECT_PATH,
+            endpoint_path=constants.DETECTION_PATH,
             params=params,
             body=body,
         )
@@ -140,6 +138,7 @@ class ExpertAiClient:
         request = self.create_request(endpoint_path=constants.CONTEXTS_PATH)
         response = self.response_class(response=request.send())
         return self.process_response(response)
+        
     def detectors(self):
         request = self.create_request(endpoint_path=constants.DETECTORS_PATH)
         response = self.response_class(response=request.send())

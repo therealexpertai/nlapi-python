@@ -27,10 +27,10 @@ TK_TIMESTAMP_FILENAME = ".timestamp"
 
 # No leading slash
 FULL_ANALYSIS_PATH = "analyze/{context}/{language}"
-DETECT_PATH = "detect/{detector}/{language}"
 ANALYSIS_PATH = "analyze/{context}/{language}/{resource}"
 CLASSIFICATION_PATH = "categorize/{taxonomy}/{language}"
 EXECUTION_KEY_PATH = "edge/key/{footprint}"
+DETECTION_PATH = "detect/{detector}/{language}"
 
 CONTEXTS_PATH = "contexts"
 DETECTORS_PATH = "detectors"
@@ -41,14 +41,14 @@ CONTENT_TYPE_HEADER = {"Content-Type": "application/json"}
 
 URLS_AND_METHODS = (
     (FULL_ANALYSIS_PATH, "POST"),
-    (DETECT_PATH, "POST"),
     (ANALYSIS_PATH, "POST"),
     (CLASSIFICATION_PATH, "POST"),
     (CONTEXTS_PATH, "GET"),
-    (DETECTORS_PATH, "GET"),
     (TAXONOMIES_PATH, "GET"),
     (TAXONOMY_PATH, "GET"),
     (EXECUTION_KEY_PATH, "GET"),        
+    (DETECTION_PATH, "POST"),
+    (DETECTORS_PATH, "GET"),
 )
 
 HTTP_GET = "GET"

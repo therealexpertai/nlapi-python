@@ -1,3 +1,5 @@
+# Demonstrates the sentiment analysis capability of the expert.ai (Cloud based) Natural Language API performed by the 'sentiment' resource
+
 from expertai.nlapi.cloud.client import ExpertAiClient
 client = ExpertAiClient()
 
@@ -6,16 +8,11 @@ language= 'en'
 
 output = client.specific_resource_analysis(
     body={"document": {"text": text}}, 
-    params={'language': language, 'resource': 'disambiguation'
+    params={'language': language, 'resource': 'sentiment'
 })
 
-# Output tokens' data
+# Output overall sentiment
 
-print("Output tokens' data:");
+print("Output overall sentiment:")
 
-print (f'{"TEXT":{20}} {"LEMMA":{40}} {"POS":{6}}')
-print (f'{"----":{20}} {"-----":{40}} {"---":{6}}')
-
-for token in output.tokens:
-    print (f'{text[token.start:token.end]:{20}} {token.lemma:{40}} {token.pos:{6}}')
-
+print(output.sentiment.overall)
