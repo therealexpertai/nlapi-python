@@ -11,7 +11,7 @@ Make reference to the [Natural Language API](https://docs.expert.ai/nlapi/latest
 
 Here is a side-by-side comparison of the two APIs:
 
-Capability | Ntaural Language API | Edge NL API
+Capability | Natural Language API | Edge NL API
 --- | --- | ---
 Where does it run? | In the Cloud, shared by all users | On user's PC
 Document analysis: Deep linguistic analysis | YES | YES
@@ -61,7 +61,7 @@ SET EAI_USERNAME=YOUR_USER
 SET EAI_PASSWORD=YOUR_PASSWORD
 ```
 
-`YOUR_USER` is the email address you specyfied during registration.
+`YOUR_USER` is the email address you specified during registration.
 
 You can also define credentials inside your code:
 
@@ -94,7 +94,7 @@ Scripts are listed and described in the tables below.
 
 ### (Cloud) Natural Language API
 
-Capability | Sample
+Capability | Sample script
 --- | ---
 Document analysis, `standard` context, **full analysis** | `/cloud natural language api/document analysis/full.py`
 Document analysis, `standard` context, sub-analysis: **Deep linguistic analysis** | `/cloud natural language api/document analysis/deep-linguistic-analysis.py`
@@ -113,7 +113,7 @@ Information detection, self-documentation resources: list of available detectors
 
 ### (Local) Edge NL API for English
 
-Capability | Sample
+Capability | Sample script
 --- | ---
 Document analysis, **full analysis** | `/local edge nl api/document analysis/full.py`
 Document analysis, sub-analysis: **Deep linguistic analysis** | `/local edge nl api/document analysis/deep-linguistic-analysis.py`
@@ -160,22 +160,6 @@ client = ExpertAiClient()
 client.set_host('localhost', 6700)
 ```
 
-## Installation (contributor)
-
-Clone the repository and run the following script:
-
-```bash
-$ cd nlapi-python
-$ pip install -r requirements-dev.txt
-```
-
-> As good practice it's recommended to work in an isolated Python environment, creating a virtual environment with [virtualenv package](https://virtualenv.pypa.io/en/stable/installation.html) before building the package. You can create your environment with the command:
->
-> ```bash
->$ virtualenv expertai
->$ source expertai/bin/activate
->```
-
 ## More examples of document analysis
 
 ### Start with deep linguistic analysis
@@ -195,7 +179,7 @@ output = client.specific_resource_analysis(
 output = client.deep_linguistic_analysis(text)
 ```
 
-### Then examine tokenization and lemmatization...
+### ...then examine tokenization and lemmatization...
 
 Lemmatization looks beyond word reduction, using a language's full vocabulary to apply a *morphological analysis* to words. The lemma of 'was' is 'be' and the lemma of 'mice' is 'mouse'. Further, the lemma of 'meeting' might be 'meet' or 'meeting' depending on its use in a sentence.
 
@@ -222,7 +206,7 @@ for token in output.tokens:
     .                    .       
     
 
-###  Part of Speech (PoS) tagging...
+###  ...Part of Speech (PoS) tagging...
 
 Analysis determines the part-of-speech of tokens. PoS labels are from the [Universal Dependencies](https://universaldependencies.org/) framework.
 
@@ -250,7 +234,7 @@ for token in output.tokens:
     .                  PUNCT   
      
 
-### and dependency parsing information
+### ...and dependency parsing information
 
 The analysis returns the dependency parsing information assigned to each token, using the Universal Dependencies framework as well.
 
@@ -280,7 +264,7 @@ for token in output.tokens:
 
 ### Named entity recognition
 
-Going a step beyond linguistic analysis, *named entities* add another layer of context.  Named entities are recognized by the `entities` sub-analysis.
+Going a step beyond linguistic analysis, **named entities** add another layer of context.  Named entities are recognized by the `entities` sub-analysis.
 
 - Natural Language API:
 ```python
@@ -310,7 +294,7 @@ for entity in output.entities:
     
 
 In addition to the entity type, the API provides some metadata from Linked Open Data sources such as WikiData and GeoNames.
-For example, you can get the open data connected with the entity `Springfield, IL` 
+For example, you can get the open data connected with the entity *Springfield, IL* 
 
 
 ```python
@@ -473,7 +457,7 @@ plt.show()
 
 ![png](https://raw.githubusercontent.com/therealexpertai/nlapi-python/master/chart_output.png)  
 
-Basic Edge NL API packages dont't provide document classification, but you can create your own text intelligence engine performing document classification by using [expert.ai Studio](https://docs.expert.ai/studio/latest).
+Basic Edge NL API packages don't provide document classification, but you can create your own text intelligence engine performing document classification by using [expert.ai Studio](https://docs.expert.ai/studio/latest).
 
 To request classification to a custom instance of the Edge NL API simply use:
 
@@ -488,7 +472,7 @@ Results structure is the same as for the Natural Language API.
 
 **Information detection** leverages deep linguistic analysis to extract particular types of information from the text.
 
-For example, the Personal Identifiable Informtion (PII) detector of the Natural Language API extract personal information such as people names, dates, addresses, telephone numbers, etc. that could be considered "sensitive".
+For example, the Personal Identifiable Information (PII) detector of the Natural Language API extract personal information such as people names, bith dates, postal addresses, telephone numbers, financial products, etc. that could be considered "sensitive".
 
 ```
 text='Longtime TFS News reporter Marcus Smith died unexpectedly Monday at the age of 60'
@@ -508,7 +492,7 @@ for extraction in document.extractions:
         print("start: ", position.start, "end: " , position.end)
 ```
 
-Basic Edge NL API packages dont't provide information detection, but you can create your own text intelligence engine performing document classification by using [expert.ai Studio](https://docs.expert.ai/studio/latest).
+Basic Edge NL API packages don't provide information detection, but you can create your own text intelligence engine performing document classification by using [expert.ai Studio](https://docs.expert.ai/studio/latest).
 
 ## ...and if you made it this far...
 
@@ -516,3 +500,19 @@ Good job! You're an expert in the expert.ai community! :clap: :tada:
 
 Check out other language SDKs available on our [Github page](https://github.com/therealexpertai).
 
+
+## Contribute to this project
+
+Clone this repository and run the following script:
+
+```bash
+$ cd nlapi-python
+$ pip install -r requirements-dev.txt
+```
+
+> As good practice it's recommended to work in an isolated Python environment, creating a virtual environment with [virtualenv package](https://virtualenv.pypa.io/en/stable/installation.html) before building the package. You can create your environment with the command:
+>
+> ```bash
+>$ virtualenv expertai
+>$ source expertai/bin/activate
+>```
