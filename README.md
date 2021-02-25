@@ -89,38 +89,42 @@ client = ExpertAiClient()
 
 ### Access capabilities and self-documentation resources
 
-In the `samples` directory of the package you can find ready-to-run scripts showing how to access all API capabilities for English texts and API self-documentation resources.  
+In the `samples` directory of the package&mdash;or this repository&mdash;you can find ready-to-run scripts showing how to access all API capabilities for English texts and API self-documentation resources.  
 Scripts are listed and described in the tables below.
 
 ### (Cloud) Natural Language API
 
+You can find these scripts in the `/samples/cloud natural language api` directory.
+
 Capability | Sample script
 --- | ---
-Document analysis, `standard` context, **full analysis** | `/cloud natural language api/document analysis/full.py`
-Document analysis, `standard` context, sub-analysis: **Deep linguistic analysis** | `/cloud natural language api/document analysis/deep-linguistic-analysis.py`
-Document analysis, `standard` context, sub-analysis: **Keyphrase extraction** | `/cloud natural language api/document analysis/keyphrase-extraction.py`
-Document analysis, `standard` context, sub-analysis: **Named entity recognition** | `/cloud natural language api/document analysis/named-entity-recognition.py`
-Document analysis, `standard` context, sub-analysis: **Relation extraction** | `/cloud natural language api/document analysis/relation-extraction.py`
-Document analysis, `standard` context, sub-analysis: **Sentiment analysis** | `/cloud natural language api/document analysis/sentiment-analysis.py`
-Document analysis, self-documemtation esources: list of the available **contexts** | `/cloud natural language api/document analysis/contexts.py`
-Document classification with **`iptc`** taxonomy | `/cloud natural language api/document classification/iptc.py`
-Document classification with **`geotax`** taxonomy | `/cloud natural language api/document classification/geotax.py`
-Document classification, self-documentation resources: list of available taxonomies | `/cloud natural language api/document classification/taxonomies.py`
-Document classification, self-documentation resources: category tree of the `iptc` taxonomy | `/cloud natural language api/document classification/category-tree-iptc.py`
-Document classification, self-documentation resources: category tree of the `geotax` taxonomy | `/cloud natural language api/document classification/category-tree-geotax.py`
-Information detection with **`pii`** detector | `/cloud natural language api/information detection/pii.py`
-Information detection, self-documentation resources: list of available detectors | `/cloud natural language api/information detection/detectors.py`
+Document analysis, `standard` context, **full analysis** | `/document analysis/full.py`
+Document analysis, `standard` context, sub-analysis: **Deep linguistic analysis** | `/document analysis/deep-linguistic-analysis.py`
+Document analysis, `standard` context, sub-analysis: **Keyphrase extraction** | `/document analysis/keyphrase-extraction.py`
+Document analysis, `standard` context, sub-analysis: **Named entity recognition** | `/document analysis/named-entity-recognition.py`
+Document analysis, `standard` context, sub-analysis: **Relation extraction** | `/document analysis/relation-extraction.py`
+Document analysis, `standard` context, sub-analysis: **Sentiment analysis** | `/document analysis/sentiment-analysis.py`
+Document analysis, self-documemtation esources: list of the available **contexts** | `/document analysis/contexts.py`
+Document classification with **`iptc`** taxonomy | `/document classification/iptc.py`
+Document classification with **`geotax`** taxonomy | `/document classification/geotax.py`
+Document classification, self-documentation resources: list of available taxonomies | `/document classification/taxonomies.py`
+Document classification, self-documentation resources: category tree of the `iptc` taxonomy | `/document classification/category-tree-iptc.py`
+Document classification, self-documentation resources: category tree of the `geotax` taxonomy | `/document classification/category-tree-geotax.py`
+Information detection with **`pii`** detector | `/information detection/pii.py`
+Information detection, self-documentation resources: list of available detectors | `/information detection/detectors.py`
 
 ### (Local) Edge NL API for English
 
+You can find these scripts in the `/samples/local edge nl api` directory.
+
 Capability | Sample script
 --- | ---
-Document analysis, **full analysis** | `/local edge nl api/document analysis/full.py`
-Document analysis, sub-analysis: **Deep linguistic analysis** | `/local edge nl api/document analysis/deep-linguistic-analysis.py`
-Document analysis, sub-analysis: **Keyphrase extraction** | `/local edge nl api/document analysis/keyphrase-extraction.py`
-Document analysis, sub-analysis: **Named entity recognition** | `/local edge nl api/document analysis/named-entity-recognition.py`
-Document analysis, sub-analysis: **Relation extraction** | `/local edge nl api/document analysis/relation-extraction.py`
-Document analysis, sub-analysis: **Sentiment analysis** | `/local edge nl api/document analysis/sentiment-analysis.py`
+Document analysis, **full analysis** | `/document analysis/full.py`
+Document analysis, sub-analysis: **Deep linguistic analysis** | `/document analysis/deep-linguistic-analysis.py`
+Document analysis, sub-analysis: **Keyphrase extraction** | `/document analysis/keyphrase-extraction.py`
+Document analysis, sub-analysis: **Named entity recognition** | `/document analysis/named-entity-recognition.py`
+Document analysis, sub-analysis: **Relation extraction** | `/document analysis/relation-extraction.py`
+Document analysis, sub-analysis: **Sentiment analysis** | `/document analysis/sentiment-analysis.py`
 
 ### Changing the language
 
@@ -480,7 +484,7 @@ text='Longtime TFS News reporter Marcus Smith died unexpectedly Monday at the ag
 
 - Natural Language API:
 ```python
-document = client.detect(
+document = client.detection(
 		body={"document": {"text": text}}, 
 		params={'language': language,'detector':'pii'})
 
