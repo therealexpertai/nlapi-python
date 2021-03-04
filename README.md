@@ -11,7 +11,7 @@ Make reference to the [Natural Language API](https://docs.expert.ai/nlapi/latest
 
 Here is a side-by-side comparison of the two APIs:
 
-Capability | Natural Language API | Edge NL API
+Capability | Ntaural Language API | Edge NL API
 --- | --- | ---
 Where does it run? | In the Cloud, shared by all users | On user's PC
 Document analysis: Deep linguistic analysis | YES | YES
@@ -26,7 +26,7 @@ Document classification: custom taxonomy | NO | YES*
 Personally Identifiable Information (PII) detection | YES | NO
 Information extraction | NO | YES*
 Document size limit? | YES (<= 10KB)| NO
-Document number limit? | NO | YES (2500 distinct documents per month, any number and type of analyses per document, when using the free tier)
+Document number limit? | NO | See the [pricing terms](https://policies.expert.ai/edgenlapi/pricing/)
 Characters limit? | YES (<= 10 million characters per month when using the free tier) | NO
 
 \* Available only for custom text intelligence engines created with [Studio](https://docs.expert.ai/studio/latest/)
@@ -61,7 +61,7 @@ SET EAI_USERNAME=YOUR_USER
 SET EAI_PASSWORD=YOUR_PASSWORD
 ```
 
-`YOUR_USER` is the email address you specified during registration.
+`YOUR_USER` is the email address you specyfied during registration.
 
 You can also define credentials inside your code:
 
@@ -94,9 +94,9 @@ Scripts are listed and described in the tables below.
 
 ### (Cloud) Natural Language API
 
-You can find these scripts in the `/samples/cloud natural language api` directory.
+You can find these scripts under the `/samples/cloud natural language api` folder.
 
-Capability | Sample script
+Capability | Sample
 --- | ---
 Document analysis, `standard` context, **full analysis** | `/document analysis/full.py`
 Document analysis, `standard` context, sub-analysis: **Deep linguistic analysis** | `/document analysis/deep-linguistic-analysis.py`
@@ -115,9 +115,9 @@ Information detection, self-documentation resources: list of available detectors
 
 ### (Local) Edge NL API for English
 
-You can find these scripts in the `/samples/local edge nl api` directory.
+You can find these scripts under the `/samples/local edge nl api` folder.
 
-Capability | Sample script
+Capability | Sample
 --- | ---
 Document analysis, **full analysis** | `/document analysis/full.py`
 Document analysis, sub-analysis: **Deep linguistic analysis** | `/document analysis/deep-linguistic-analysis.py`
@@ -166,7 +166,7 @@ client.set_host('localhost', 6700)
 
 ## More examples of document analysis
 
-### Start with deep linguistic analysis
+### Start with deep linguistic analysis...
 
 To perform the [deep linguistic analysis](https://docs.expert.ai/nlapi/latest/guide/linguistic-analysis/) of a text:
 
@@ -268,7 +268,7 @@ for token in output.tokens:
 
 ### Named entity recognition
 
-Going a step beyond linguistic analysis, **named entities** add another layer of context.  Named entities are recognized by the `entities` sub-analysis.
+Going a step beyond linguistic analysis, *named entities* add another layer of context.  Named entities are recognized by the `entities` sub-analysis.
 
 - Natural Language API:
 ```python
@@ -298,7 +298,7 @@ for entity in output.entities:
     
 
 In addition to the entity type, the API provides some metadata from Linked Open Data sources such as WikiData and GeoNames.
-For example, you can get the open data connected with the entity *Springfield, IL* 
+For example, you can get the open data connected with the entity `Springfield, IL` 
 
 
 ```python
@@ -392,7 +392,6 @@ text='John sent a letter to Mary.'
 
 - Natural Language API:
 ```python
-# cloud API
 document = client.specific_resource_analysis(
     body={"document": {"text": text}}, 
     params={'language': language, 'resource': 'relations'})
@@ -400,7 +399,6 @@ document = client.specific_resource_analysis(
 
 - Edge NL API:
 ```python
-# Edge API
 document = client.relations(text)
 ```
 
@@ -413,7 +411,7 @@ for rel in document.relations:
       print("Relation:", r.relation, "Lemma:", r.lemma )
 ```
 
-### More examples of document classification
+## More examples of document classification
 
 Let's see how to classify documents according to the [**IPTC Media Topics Taxonomy**](https://iptc.org/standards/media-topics/) provided by the Natural Language API; then we'll use the matplot lib to display categorization results as a bar chart.
 
@@ -461,7 +459,7 @@ plt.show()
 
 ![png](https://raw.githubusercontent.com/therealexpertai/nlapi-python/master/chart_output.png)  
 
-Basic Edge NL API packages don't provide document classification, but you can create your own text intelligence engine performing document classification by using [expert.ai Studio](https://docs.expert.ai/studio/latest).
+Basic Edge NL API packages dont't provide document classification, but you can create your own text intelligence engine performing document classification by using [expert.ai Studio](https://docs.expert.ai/studio/latest).
 
 To request classification to a custom instance of the Edge NL API simply use:
 
@@ -472,11 +470,11 @@ document = client.classification(text)
 Results structure is the same as for the Natural Language API.
 
 
-## Information detection
+## Another information detection example
 
 **Information detection** leverages deep linguistic analysis to extract particular types of information from the text.
 
-For example, the Personal Identifiable Information (PII) detector of the Natural Language API extract personal information such as people names, bith dates, postal addresses, telephone numbers, financial products, etc. that could be considered "sensitive".
+For example, the Personal Identifiable Informtion (PII) detector of the Natural Language API extract personal information such as people names, dates, addresses, telephone numbers, etc. that could be considered "sensitive".
 
 ```
 text='Longtime TFS News reporter Marcus Smith died unexpectedly Monday at the age of 60'
@@ -496,7 +494,7 @@ for extraction in document.extractions:
         print("start: ", position.start, "end: " , position.end)
 ```
 
-Basic Edge NL API packages don't provide information detection, but you can create your own text intelligence engine performing document classification by using [expert.ai Studio](https://docs.expert.ai/studio/latest).
+Basic Edge NL API packages dont't provide information detection, but you can create your own text intelligence engine performing document classification by using [expert.ai Studio](https://docs.expert.ai/studio/latest).
 
 ## ...and if you made it this far...
 
@@ -504,10 +502,9 @@ Good job! You're an expert in the expert.ai community! :clap: :tada:
 
 Check out other language SDKs available on our [Github page](https://github.com/therealexpertai).
 
+## Contribute!
 
-## Contribute to this project
-
-Clone this repository and run the following script:
+Clone this GitHub repository and run the following script:
 
 ```bash
 $ cd nlapi-python
@@ -520,3 +517,5 @@ $ pip install -r requirements-dev.txt
 >$ virtualenv expertai
 >$ source expertai/bin/activate
 >```
+
+
