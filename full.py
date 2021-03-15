@@ -1,9 +1,13 @@
-from expertai.nlapi.edge.client import ExpertAiClient
+# Demonstrates the full document analysis capability of the expert.ai (Cloud based) Natural Language API
+
+from expertai.nlapi.cloud.client import ExpertAiClient
 client = ExpertAiClient()
 
-text = "Michael Jordan was one of the best basketball players of all time. Scoring was Jordan's stand-out skill, but he still holds a defensive NBA record, with eight steals in a half." 
+text = "Michael Jordan was one of the best basketball players of all time. Scoring was Jordan's stand-out skill, but he still holds a defensive NBA record, with eight steals in a half.'" 
+language= 'en'
 
-output = client.full_analysis(text)
+output = client.full_analysis(body={"document": {"text": text}}, params={'language': language})
+
 
 # Output arrays size
 
