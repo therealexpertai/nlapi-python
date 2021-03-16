@@ -89,7 +89,7 @@ client = ExpertAiClient()
 
 ### Access capabilities and self-documentation resources
 
-In the `samples` directory of the package&mdash;or this repository&mdash;you can find ready-to-run scripts showing how to access all API capabilities for English texts and API self-documentation resources.  
+In the `samples` directory of this repository you can find ready-to-run scripts showing how to access all API capabilities for English texts and API self-documentation resources.  
 Scripts are listed and described in the tables below.
 
 ### (Cloud) Natural Language API
