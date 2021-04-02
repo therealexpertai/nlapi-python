@@ -11,7 +11,7 @@ Make reference to the [Natural Language API](https://docs.expert.ai/nlapi/latest
 
 Here is a side-by-side comparison of the two APIs:
 
-Capability | Ntaural Language API | Edge NL API
+Capability | Natural Language API | Edge NL API
 --- | --- | ---
 Where does it run? | In the Cloud, shared by all users | On user's PC
 Document analysis: Deep linguistic analysis | YES | YES
