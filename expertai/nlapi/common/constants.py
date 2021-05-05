@@ -80,9 +80,6 @@ LANGUAGES = {
     "fr": "French",
     "it": "Italian",
 }
-DETECTORS = {
-    "pii": "Protected Information"
-}
 
 RESOURCES_NAMES = ["disambiguation", "relevants", "entities", "relations", "sentiment"]
 

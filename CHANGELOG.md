@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+## [2.3.0] - 2021-05-05
+
+* Disabled mandatory validation for detectors' names to allow for [Writeprint detection](https://docs.expert.ai/nlapi/latest/guide/detectors/#writeprint-detector)
+
 ## [2.2.0] - 2021-03-15
 
 * Added support for [information detection](https://docs.expert.ai/nlapi/latest/guide/detection)

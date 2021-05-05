@@ -25,7 +25,7 @@ class ExpertAiValidation:
     def language_value_is_correct(self, language):
         return language in constants.LANGUAGES.keys()
     def detector_value_is_correct(self, detector):
-        return detector in constants.DETECTORS.keys()
+        return True;
 
     def resource_value_is_correct(self, resource):
         return resource in constants.RESOURCES_NAMES
