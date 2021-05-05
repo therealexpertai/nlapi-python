@@ -22,8 +22,11 @@ Document analysis: Sentiment analysis | YES | YES
 Document analysis, full (the sum of all of the above in a single operation) | YES | YES
 Document classification: IPTC Media topics | YES | NO
 Document classification: GeoTax | YES | NO
+Document classification: Emotional traits | YES | NO
+Document classification: Behavioral traits | YES | NO
 Document classification: custom taxonomy | NO | YES*
 Personally Identifiable Information (PII) detection | YES | NO
+Writeprint detection | YES | NO
 Information extraction | NO | YES*
 Document size limit? | YES (<= 10KB)| NO
 Document number limit? | NO | See the [pricing terms](https://policies.expert.ai/edgenlapi/pricing/)
@@ -107,9 +110,13 @@ Document analysis, `standard` context, sub-analysis: **Sentiment analysis** | `/
 Document analysis, self-documemtation esources: list of the available **contexts** | `/document analysis/contexts.py`
 Document classification with **`iptc`** taxonomy | `/document classification/iptc.py`
 Document classification with **`geotax`** taxonomy | `/document classification/geotax.py`
+Document classification with **`emotional-traits`** taxonomy | `/document classification/emotional-traits.py`
+Document classification with **`behavioral-traits`** taxonomy | `/document classification/behavioral-traits.py`
 Document classification, self-documentation resources: list of available taxonomies | `/document classification/taxonomies.py`
 Document classification, self-documentation resources: category tree of the `iptc` taxonomy | `/document classification/category-tree-iptc.py`
 Document classification, self-documentation resources: category tree of the `geotax` taxonomy | `/document classification/category-tree-geotax.py`
+Document classification, self-documentation resources: category tree of the `emotional-traits` taxonomy | `/document classification/category-tree-emotional-traits.py`
+Document classification, self-documentation resources: category tree of the `behavioral-traits` taxonomy | `/document classification/category-tree-behavioral-traits.py`
 Information detection with **`pii`** detector | `/information detection/pii.py`
 Information detection, self-documentation resources: list of available detectors | `/information detection/detectors.py`
 
@@ -494,7 +501,7 @@ for extraction in document.extractions:
         print("start: ", position.start, "end: " , position.end)
 ```
 
-Basic Edge NL API packages dont't provide information detection, but you can create your own text intelligence engine performing document classification by using [expert.ai Studio](https://docs.expert.ai/studio/latest).
+Basic Edge NL API packages dont't provide information detection, but you can create your own text intelligence engine performing information detection by using [expert.ai Studio](https://docs.expert.ai/studio/latest).
 
 ## ...and if you made it this far...
 
