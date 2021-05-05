@@ -118,6 +118,7 @@ Document classification, self-documentation resources: category tree of the `geo
 Document classification, self-documentation resources: category tree of the `emotional-traits` taxonomy | `/document classification/category-tree-emotional-traits.py`
 Document classification, self-documentation resources: category tree of the `behavioral-traits` taxonomy | `/document classification/category-tree-behavioral-traits.py`
 Information detection with **`pii`** detector | `/information detection/pii.py`
+Information detection with **`writeprint`** detector | `/information detection/writeprint.py`
 Information detection, self-documentation resources: list of available detectors | `/information detection/detectors.py`
 
 ### (Local) Edge NL API for English
