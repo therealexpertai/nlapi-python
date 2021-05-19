@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
 import re
 import hashlib
 import json
@@ -36,6 +37,8 @@ class ExpertAiClient:
         self._host = "127.0.0.1"
         self._port = "6699"
         self._response = None
+        self._resource = None
+        self._use_https = False
 
     def _analysis(self, text, options):
         host = self._host + ":" + self._port
@@ -43,25 +46,27 @@ class ExpertAiClient:
         ekey = self._get_execution_key(text)
         
         # call internal server with execution key for analysis
-        body = {'document': {'text' : text}, 'options': options }
+        body = {'document': {'text' : text}, 'options': options, 'resource': self._resource }
         header = {'Content-Type' : 'application/json', 'execution-key' : ekey}
         response = self.response_class(self.post_request(host, '/api/analyze', json.dumps(body), header))
         return self.process_response(response)
 
     def _get_execution_key(self, text):
-        params = self.set_param(text)
+        ekey = ""
+        if (os.getenv(constants.USERNAME_ENV_VARIABLE)!=None) or (os.getenv(constants.TOKEN_ENV_VARIABLE)!=None):
+            params = self.set_param(text)
 
-        request = self.create_request(
-            endpoint_path=constants.EXECUTION_KEY_PATH,
-            params=params)
-        response = request.send()
-        if response.status_code != 200:
-            raise ExpertAiRequestError(
-                "Response status code: {}".format(response.status_code)
-            )
-        ekey_response = json.loads(response.content.decode())
-        if "key" in ekey_response:
-            ekey = ekey_response["key"]
+            request = self.create_request(
+                endpoint_path=constants.EXECUTION_KEY_PATH,
+                params=params)
+            response = request.send()
+            if response.status_code != 200:
+                raise ExpertAiRequestError(
+                    "Response status code: {}".format(response.status_code)
+                )
+            ekey_response = json.loads(response.content.decode())
+            if "key" in ekey_response:
+                ekey = ekey_response["key"]
         return ekey
 
     def urlpath_keywords(self, endpoint_path):
@@ -120,11 +125,21 @@ class ExpertAiClient:
             return self._response.json
         else:
             return {}
+
+    def get_proto(self):
+        if self._use_https:
+            return 'https://'
+        return 'http://'
+    
     def post_request(self, host, uri, data, header={'Content-Type': 'application/json'}):
-        curi = 'http://' + host + uri
+        curi = self.get_proto() + host + uri
         response = requests.post(curi, data=data, headers=header)    
         #return response.status_code, response.content.decode('utf-8')
         return response
+
+    def get_request(self, host, uri):
+        curi = self.get_proto() + host + uri
+        return requests.get(curi)
 
     def set_host(self, host="127.0.0.1", port=6699):
         self._host = host
@@ -141,6 +156,12 @@ class ExpertAiClient:
         options["analysis"] = analysis
         options["features"] = features
         return options
+
+    def set_resource(self, resource=None):
+        self._resource = resource
+
+    def use_https(self, https=True):
+        self._use_https = https
 
     def full_analysis(self, text):
         options=self.set_options([ "disambiguation", "relevants", "entities", "sentiment", "relations" ], [ "knowledge", "dependency"])
@@ -176,7 +197,7 @@ class ExpertAiClient:
 
     def taxonomy(self):
         host = self._host + ":" + self._port
-        body = { "info" : "taxonomy" } 
+        body = { "info" : "taxonomy", "resource" : self._resource } 
         header = {'Content-Type' : 'application/json' }    
         response = self.response_class(self.post_request(host, '/api/model', json.dumps(body), header))
         return self.process_response(response)
@@ -187,7 +208,36 @@ class ExpertAiClient:
 
     def templates(self):
         host = self._host + ":" + self._port
-        body = { "info" : "templates" }
+        body = { "info" : "templates", "resource" : self._resource }
         header = {'Content-Type' : 'application/json' }    
         response = self.response_class(self.post_request(host, '/api/model', json.dumps(body), header))
         return self.process_response(response)
+
+    def resources(self):
+        host = self._host + ":" + self._port
+        body = ""
+        header = {'Content-Type' : 'application/json' }
+        http_response = self.post_request(host, "/essex/packages", body, header)
+        if http_response.status_code==constants.HTTP_SUCCESSFUL:
+            j = http_response.json()
+            if 'data' in j:
+                return j['data']
+        return []
+
+    def statistics(self):
+        host = self._host + ":" + self._port
+        body = ""
+        header = {'Content-Type' : 'application/json' }
+        http_response = self.post_request(host, "/essex/statistics", body, header)
+        if http_response.status_code==constants.HTTP_SUCCESSFUL:
+            j = http_response.json()
+            if 'data' in j:
+                return j['data']
+        return {}
+
+    def health(self):
+        host = self._host + ":" + self._port
+        http_response = self.get_request(host, '/health')
+        if http_response.status_code==constants.HTTP_SUCCESSFUL:
+            return True
+        return False
