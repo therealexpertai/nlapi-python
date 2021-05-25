@@ -1,8 +1,8 @@
 <img style="float: right;" src="https://docs.expert.ai/logo.png" width="150px">
 
-# expert.ai Natural Language APIs for Python
+# expert.ai Natural Language API client for Python
 
-Python client for the expert.ai Natural Language APIs adds Natural Language understanding capabilities to your Python apps.
+Python client for the expert.ai Natural Language API adds Natural Language understanding capabilities to your Python apps.
 The client can use either the Cloud based [Natural Language API](https://docs.expert.ai/nlapi/latest/) or a local instance of [Edge NL API](https://docs.expert.ai/edgenlapi/latest/).
 
 ## APIs capabilites
