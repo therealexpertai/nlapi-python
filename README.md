@@ -42,7 +42,7 @@ To install the client library with `pip`:
 pip install expertai-nlapi
 ```
 
-To install using conda:
+To install using `conda`:
 
 ```bash
 conda install -c conda-forge expertai-nlapi
