@@ -36,10 +36,16 @@ Characters limit? | YES (<= 10 million characters per month when using the free 
 
 ## Installation
 
-Use `pip` to install the client library:
+To install the client library with `pip`:
 
 ```bash
 pip install expertai-nlapi
+```
+
+To install using conda:
+
+```bash
+conda install -c conda-forge expertai-nlapi
 ```
 
 ## Usage
