@@ -25,8 +25,9 @@ Document classification: GeoTax | YES | NO
 Document classification: Emotional traits | YES | NO
 Document classification: Behavioral traits | YES | NO
 Document classification: custom taxonomy | NO | YES*
-Personally Identifiable Information (PII) detection | YES | NO
-Writeprint detection | YES | NO
+Information detection: Personally Identifiable Information (PII) | YES | NO
+Information detection: Writeprint | YES | NO
+Information detection: Temporal information | YES | NO
 Information extraction | NO | YES*
 Document size limit? | YES (<= 10KB)| NO
 Document number limit? | NO | See the [pricing terms](https://policies.expert.ai/edgenlapi/pricing/)
@@ -125,6 +126,7 @@ Document classification, self-documentation resources: category tree of the `emo
 Document classification, self-documentation resources: category tree of the `behavioral-traits` taxonomy | `/document classification/category-tree-behavioral-traits.py`
 Information detection with **`pii`** detector | `/information detection/pii.py`
 Information detection with **`writeprint`** detector | `/information detection/writeprint.py`
+Information detection with **`temporal-information`** detector | `/information detection/temporal-information.py`
 Information detection, self-documentation resources: list of available detectors | `/information detection/detectors.py`
 
 ### (Local) Edge NL API for English
@@ -484,7 +486,7 @@ document = client.classification(text)
 Results structure is the same as for the Natural Language API.
 
 
-## Another information detection example
+## Information detection example
 
 **Information detection** leverages deep linguistic analysis to extract particular types of information from the text.
 
