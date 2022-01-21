@@ -11,8 +11,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+import base64
+import json
 import os
+import time
 from unittest.mock import MagicMock, patch
 
 from expertai.nlapi.common import constants
@@ -116,10 +118,37 @@ class ExpertAiAuthTestCase(ExpertAiTestCase):
         self.assertEqual(self.patched_post.call_count, 1)
         self.assertEqual(patched_token_is_valid.call_count, 2)
 
-    def test_token_env_variable_is_empty(self):
+    @patch("expertai.nlapi.common.authentication.ExpertAiAuth.token_is_expired")
+    def test_token_env_variable_is_empty(self, patched_token_is_expired):
         """
         ...then the token should not be considered as valid
         """
         with patch.dict(os.environ, {constants.TOKEN_ENV_VARIABLE: ""}):
             self.assertFalse(self.auth_class.token_is_valid())
+            self.assertEqual(patched_token_is_expired.call_count, 0)
 
+
+    @patch("os.getenv", return_value="_.eyJleHAiOjE2NDI0OTMyMjZ9._")
+    def test_token_is_expired(self, patched_getenv):
+        is_expired = self.auth_class.token_is_expired()
+
+        patched_getenv.assert_called_once_with(constants.TOKEN_ENV_VARIABLE)
+        self.assertTrue(is_expired)
+
+    def test_token_is_not_expired(self):
+        """
+        ...if expire date is after an hour
+        """
+        expire_time = round(time.time() + 3600)
+        token_payload = f'{{"exp": {expire_time}}}'
+        encode = base64.b64encode(token_payload.encode('ascii'))
+
+        with patch.dict(os.environ, {constants.TOKEN_ENV_VARIABLE: f"_.{encode.decode('ascii')}._"}):
+            is_expired = self.auth_class.token_is_expired()
+            self.assertFalse(is_expired)
+
+    @patch("expertai.nlapi.common.authentication.ExpertAiAuth.token_is_expired", returnValue=True)
+    def test_token_is_not_valid_if_expired(self, patched_not_expired_token):
+        with patch.dict(os.environ, {constants.TOKEN_ENV_VARIABLE: "test"}):
+            self.assertFalse(self.auth_class.token_is_valid())
+            self.assertEqual(patched_not_expired_token.call_count, 1)

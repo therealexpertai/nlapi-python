@@ -11,7 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+import base64
+import json
+import time
 import os
 
 import requests
@@ -28,7 +30,7 @@ class ExpertAiAuth:
 
     @property
     def username(self):
-        value = os.getenv(constants.USERNAME_ENV_VARIABLE)
+        value = os.getenv(constants.PASSWORD_ENV_VARIABLE)
         if not value:
             raise CredentialsError("Missing username env variable")
         return value
@@ -40,8 +42,20 @@ class ExpertAiAuth:
             raise CredentialsError("Missing password env variable")
         return value
 
+    def token_is_expired(self):
+        token = os.getenv(constants.TOKEN_ENV_VARIABLE)
+
+        payload_base64 = token.split(".")[1].encode('ascii')
+        payload_decoded = base64.b64decode(payload_base64).decode('ascii')
+        exp = json.loads(payload_decoded).get('exp')
+
+        current_date = round(time.time())
+
+        return exp is not None and current_date >= exp
+
+
     def token_is_valid(self):
-        return os.getenv(constants.TOKEN_ENV_VARIABLE)
+        return os.getenv(constants.TOKEN_ENV_VARIABLE) and not self.token_is_expired()
 
     def fetch_token_value(self):
         if self.token_is_valid():
@@ -62,4 +76,5 @@ class ExpertAiAuth:
 
         token = response.text
         os.environ[constants.TOKEN_ENV_VARIABLE] = token
+
         return token
