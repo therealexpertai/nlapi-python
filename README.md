@@ -3,15 +3,15 @@
 # expert.ai Natural Language API client for Python
 
 Python client for the expert.ai Natural Language API adds Natural Language understanding capabilities to your Python apps.
-The client can use either the Cloud based [Natural Language API](https://docs.expert.ai/nlapi/latest/) or a local instance of [Edge NL API](https://docs.expert.ai/edgenlapi/latest/).
+The client can use either the Cloud based [Natural Language API](https://docs.expert.ai/nlapi/latest/) or [Studio Local Deployment Agent](https://docs.expert.ai/studio/latest/lda-api/).
 
 ## APIs capabilites
 
-Make reference to the [Natural Language API](https://docs.expert.ai/nlapi/latest/guide/) and [Edge NL API](https://docs.expert.ai/edgenlapi/latest/guide/) documentation to know more about the APIs capabilities.
+Make reference to the [Natural Language API](https://docs.expert.ai/nlapi/latest/guide/) and [Studio Local Deployment Agent](https://docs.expert.ai/studio/latest/lda-api/guide/) documentation to know more about the APIs capabilities.
 
 Here is a side-by-side comparison of the two APIs:
 
-Capability | Natural Language API | Edge NL API
+Capability | Natural Language API | Studio Local Deployment Agent
 --- | --- | ---
 Where does it run? | In the Cloud, shared by all users | On user's PC
 Document analysis: Deep linguistic analysis | YES | YES
@@ -33,7 +33,7 @@ Document size limit? | YES (<= 10KB)| NO
 Document number limit? | NO | See the [pricing terms](https://policies.expert.ai/edgenlapi/pricing/)
 Characters limit? | YES (<= 10 million characters per month when using the free tier) | NO
 
-\* Available only for custom text intelligence engines created with [Studio](https://docs.expert.ai/studio/latest/)
+\* Based on [Studio](https://docs.expert.ai/studio/latest/) project.
 
 ## Installation
 
@@ -53,45 +53,43 @@ conda install -c conda-forge expertai-nlapi
 
 ### Authorization
 
-Expert.ai Natural Language APIs are free to use, ideally forever, with the limitations specified in the table above.  
 You need an expert.ai developer account to use the APIs and you can get one for free registering on the expert.ai [developer portal](https://developer.expert.ai).  
-If you need to exceed the free tier usage limits, subscribe a payment plan from inside the developer portal.
 
-The Python client code expects your developer account credentials to be specified as environment variables:
+Your developer account credentials must be specified as environment variables:
  
 - Linux:
 ```bash
-export EAI_USERNAME=YOUR_USER
+export EAI_USERNAME=YOUR_USERNAME
 export EAI_PASSWORD=YOUR_PASSWORD
 ```
 
 - Windows:
 ```bash
-SET EAI_USERNAME=YOUR_USER
+SET EAI_USERNAME=YOUR_USERNAME
 SET EAI_PASSWORD=YOUR_PASSWORD
 ```
 
-`YOUR_USER` is the email address you specyfied during registration.
+Replace `YOUR_USERNAME` with the email address you specyfied during registration and `YOUR_PASSWORD` with the actual account password.
 
 You can also define credentials inside your code:
 
 ```python
 import os
-os.environ["EAI_USERNAME"] = 'your@account.email'
-os.environ["EAI_PASSWORD"] = 'yourpwd'
+os.environ["EAI_USERNAME"] = 'YOUR_USERNAME'
+os.environ["EAI_PASSWORD"] = 'YOUR_PASSWORD'
 ```
 
 ### Create the client
 
 The next thing to do inside your code is importing the client section of the library and instantiating the client based on the API you want to use.
 
-- To use the Cloud based Natural Language API:
+- To use Natural Language API:
 ```python
 from expertai.nlapi.cloud.client import ExpertAiClient
 client = ExpertAiClient()
 ```
 
-- To use a local instance of Edge NL API:
+- To use Studio Local Deployment Agent:
 ```python
 from expertai.nlapi.edge.client import ExpertAiClient
 client = ExpertAiClient()
@@ -102,9 +100,9 @@ client = ExpertAiClient()
 In the `samples` directory of this repository you can find ready-to-run scripts showing how to access all API capabilities for English texts and API self-documentation resources.  
 Scripts are listed and described in the tables below.
 
-### (Cloud) Natural Language API
+#### Natural Language API
 
-You can find these scripts under the `/samples/cloud natural language api` folder.
+You can find these scripts under the `/samples/natural language api` folder.
 
 Capability | Sample
 --- | ---
@@ -129,9 +127,9 @@ Information detection with **`writeprint`** detector | `/information detection/w
 Information detection with **`temporal-information`** detector | `/information detection/temporal-information.py`
 Information detection, self-documentation resources: list of available detectors | `/information detection/detectors.py`
 
-### (Local) Edge NL API for English
+#### Studio Local Deployment Agent
 
-You can find these scripts under the `/samples/local edge nl api` folder.
+You can find these scripts under the `/samples/studio lda` folder.
 
 Capability | Sample
 --- | ---
@@ -144,7 +142,7 @@ Document analysis, sub-analysis: **Sentiment analysis** | `/document analysis/se
 
 ### Changing the language
 
-The Natural Language API is capable of processing texts of various languages.
+Natural Language API is capable of processing texts of various languages.
 You can use self-documentations resources like `contexts` and `taxonomies`&mdash;look for the corresponding ready-to-run scripts in the first of the two tables above&mdash;to determine if a functionality is available for a given language.  
 If it's available, specify the `language` parameter in your code, for example:
 
@@ -160,25 +158,7 @@ output = client.specific_resource_analysis(
 
 See also the documentation pages about [contexts](https://docs.expert.ai/nlapi/latest/guide/contexts-and-kg/) and [taxonomies](https://docs.expert.ai/nlapi/latest/guide/taxonomies/).
 
-Edge NL API can also process texts of different languages, but in this case you have to download from the developer portal and launch on your PC the package corresponding to the language you are interested in.
-
-### Change Edge NL API host and port
-
-If you need to run your client application on a computer and the Edge NL API on another or if you need Edge NL API to listen on a TCP port other than the default (which is 6699), you can use the `set_host` method of the Edge NL API client to specify the host and the port, for example:
-
-```python
-from expertai.nlapi.edge.client import ExpertAiClient
-client = ExpertAiClient()
-client.set_host('my_edge_server', 6699)
-```
-
-Or, if you continue to use the API on the local computer, but you changed the port in the Edge NL API startup batch file:
-
-```python
-from expertai.nlapi.edge.client import ExpertAiClient
-client = ExpertAiClient()
-client.set_host('localhost', 6700)
-```
+Studio Local Deployment Agent supports the language of your Studio project.
 
 ## More examples of document analysis
 
@@ -194,7 +174,7 @@ output = client.specific_resource_analysis(
 })
 ```
 
-- Edge NL API:
+- Studio Local Deployment Agent:
 ```python
 output = client.deep_linguistic_analysis(text)
 ```
@@ -293,7 +273,7 @@ output = client.specific_resource_analysis(
     params={'language': language, 'resource': 'entities'})
 ```
 
-- Edge NL API:
+- Studio Local Depolyment Agent:
 ```python
 output = client.named_entity_recognition(text)
 ```
@@ -354,7 +334,7 @@ document = client.specific_resource_analysis(
     params={'language': language, 'resource': 'relevants'})
 ```
 
-- Edge NL API:
+- Studio Local Deployment Agent:
 ```python
 document = client.keyphrase_extraction(text)
 ```
@@ -386,7 +366,7 @@ document = client.specific_resource_analysis(
     params={'language': language, 'resource': 'sentiment'})
 ```
 
-- Edge NL API:
+- Studio Local Deployment Agent:
 ```python
 document = client.sentiment(text)
 ```
@@ -413,7 +393,7 @@ document = client.specific_resource_analysis(
     params={'language': language, 'resource': 'relations'})
 ```
 
-- Edge NL API:
+- Studio Local Deployment Agent:
 ```python
 document = client.relations(text)
 ```
@@ -475,9 +455,7 @@ plt.show()
 
 ![png](https://raw.githubusercontent.com/therealexpertai/nlapi-python/master/chart_output.png)  
 
-Basic Edge NL API packages dont't provide document classification, but you can create your own text intelligence engine performing document classification by using [expert.ai Studio](https://docs.expert.ai/studio/latest).
-
-To request classification to a custom instance of the Edge NL API simply use:
+If your [Studio](https://docs.expert.ai/studio/latest) project performs document classification, to request it to Studio Local Deployment Agent use:
 
 ```python
 document = client.classification(text)
@@ -510,7 +488,13 @@ for extraction in document.extractions:
         print("start: ", position.start, "end: " , position.end)
 ```
 
-Basic Edge NL API packages dont't provide information detection, but you can create your own text intelligence engine performing information detection by using [expert.ai Studio](https://docs.expert.ai/studio/latest).
+If your [Studio](https://docs.expert.ai/studio/latest) project performs information extraction, to request it to Studio Local Deployment Agent use:
+
+```python
+document = client.extraction(text)
+```
+
+Results structure is the same as for the Natural Language API.
 
 ## ...and if you made it this far...
 
