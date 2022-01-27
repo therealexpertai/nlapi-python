@@ -30,7 +30,7 @@ class ExpertAiAuth:
 
     @property
     def username(self):
-        value = os.getenv(constants.PASSWORD_ENV_VARIABLE)
+        value = os.getenv(constants.USERNAME_ENV_VARIABLE)
         if not value:
             raise CredentialsError("Missing username env variable")
         return value
