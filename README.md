@@ -30,7 +30,7 @@ Information detection: Writeprint | YES | NO
 Information detection: Temporal information | YES | NO
 Information extraction | NO | YES*
 Document size limit? | YES (<= 10KB)| NO
-Document number limit? | NO | See the [pricing terms](https://policies.expert.ai/edgenlapi/pricing/)
+Document number limit? | NO | See the [Service Level Agreement](https://policies.expert.ai/slda/sla/)
 Characters limit? | YES (<= 10 million characters per month when using the free tier) | NO
 
 \* Based on [Studio](https://docs.expert.ai/studio/latest/) project.
