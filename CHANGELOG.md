@@ -10,9 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * JWT Automatic Renewal
-
-### Added
-
 * Added resources, statistics and health api for Edge mode
 * Sample script for Temporal Information detection
 
