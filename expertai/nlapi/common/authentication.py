@@ -45,8 +45,14 @@ class ExpertAiAuth:
     def token_is_expired(self):
         token = os.getenv(constants.TOKEN_ENV_VARIABLE)
 
-        payload_base64 = token.split(".")[1].encode('ascii')
-        payload_decoded = base64.b64decode(payload_base64).decode('ascii')
+        payload_base64 = token.split(".")[1]
+        
+        # Append padding characters if needed
+        if len(payload_base64) % 4 != 0:
+            payload_base64 = payload_base64 + '=' * (4 - len(payload_base64) % 4)
+        
+        payload_decoded = base64.b64decode(payload_base64)
+        
         exp = json.loads(payload_decoded).get('exp')
 
         current_date = round(time.time())
