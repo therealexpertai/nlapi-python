@@ -29,6 +29,8 @@ setup(
     #packages=find_namespace_packages(include=['expertai.nlapi']),
     packages=find_namespace_packages(include=['expertai.nlapi.*']),
     install_requires=["requests"],
+    license_files = ('LICENSE',),
+    license='Apache License 2.0',
     classifiers=[
 		#'Development Status :: 5 - Production/Stable',        
         "Development Status :: 4 - Beta",
