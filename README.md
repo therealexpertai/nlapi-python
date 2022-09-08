@@ -17,7 +17,7 @@ Where does it run? | In the Cloud, shared by all users | On user's PC
 Document analysis: | YES | YES
 Document classification with ready-to-use taxonomies (IPTC Media topics, GeoTax, Emotional traits, Behavioral traits) | YES | NO
 Custom document classification | NO | YES*
-Information detection with ready-to-use detector (Personally Identifiable Information (PII), Writeprint, Temporal information, ESG Sentiment, Hate speech) | YES | NO
+Information detection with ready-to-use detectors (Personally Identifiable Information (PII), Writeprint, Temporal information, ESG Sentiment, Hate speech) | YES | NO
 Custom information extraction | NO | YES*
 Document size limit? | YES (<= 10KB)| NO
 Document number limit? | NO | See the [Service Level Agreement](https://policies.expert.ai/slda/sla/)
