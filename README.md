@@ -139,8 +139,8 @@ You can use self-documentations resources like `contexts` and `taxonomies`&mdash
 If it's available, specify the `language` parameter in your code, for example:
 
 ```python
-text = "Michael Jordan è stato uno dei migliori giocatori di pallacanestro di tutti i tempi. Fare canestro è stata la capacità in cui Jordan spiccava, ma ancora detiene un record NBA di gioco difensivo, con otto palle rubate in metà partita."
-language= 'it'
+text = "Michael Jordan was one of the best basketball players of all time. Scoring was Jordan's stand-out skill, but he still holds a defensive NBA record, with eight steals in a half."
+language= 'en'
 
 output = client.specific_resource_analysis(
     body={"document": {"text": text}}, 
