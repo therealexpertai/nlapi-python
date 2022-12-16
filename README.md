@@ -14,21 +14,11 @@ Here is a side-by-side comparison of the two APIs:
 Capability | Natural Language API | Studio Local Deployment Agent
 --- | --- | ---
 Where does it run? | In the Cloud, shared by all users | On user's PC
-Document analysis: Deep linguistic analysis | YES | YES
-Document analysis: Keyphrase extraction | YES | YES
-Document analysis: Named entities recognition | YES | YES
-Document analysis: Relation extraction | YES | YES
-Document analysis: Sentiment analysis | YES | YES
-Document analysis, full (the sum of all of the above in a single operation) | YES | YES
-Document classification: IPTC Media topics | YES | NO
-Document classification: GeoTax | YES | NO
-Document classification: Emotional traits | YES | NO
-Document classification: Behavioral traits | YES | NO
-Document classification: custom taxonomy | NO | YES*
-Information detection: Personally Identifiable Information (PII) | YES | NO
-Information detection: Writeprint | YES | NO
-Information detection: Temporal information | YES | NO
-Information extraction | NO | YES*
+Document analysis: | YES | YES
+Document classification with ready-to-use taxonomies (IPTC Media topics, GeoTax, Emotional traits, Behavioral traits) | YES | NO
+Custom document classification | NO | YES*
+Information detection with ready-to-use detectors (Personally Identifiable Information (PII), Writeprint, Temporal information, ESG Sentiment, Hate speech) | YES | NO
+Custom information extraction | NO | YES*
 Document size limit? | YES (<= 10KB)| NO
 Document number limit? | NO | See the [Service Level Agreement](https://policies.expert.ai/slda/sla/)
 Characters limit? | YES (<= 10 million characters per month when using the free tier) | NO
@@ -106,26 +96,28 @@ You can find these scripts under the `/samples/natural language api` folder.
 
 Capability | Sample
 --- | ---
-Document analysis, `standard` context, **full analysis** | `/document analysis/full.py`
-Document analysis, `standard` context, sub-analysis: **Deep linguistic analysis** | `/document analysis/deep-linguistic-analysis.py`
-Document analysis, `standard` context, sub-analysis: **Keyphrase extraction** | `/document analysis/keyphrase-extraction.py`
-Document analysis, `standard` context, sub-analysis: **Named entity recognition** | `/document analysis/named-entity-recognition.py`
-Document analysis, `standard` context, sub-analysis: **Relation extraction** | `/document analysis/relation-extraction.py`
-Document analysis, `standard` context, sub-analysis: **Sentiment analysis** | `/document analysis/sentiment-analysis.py`
-Document analysis, self-documemtation esources: list of the available **contexts** | `/document analysis/contexts.py`
-Document classification with **`iptc`** taxonomy | `/document classification/iptc.py`
-Document classification with **`geotax`** taxonomy | `/document classification/geotax.py`
-Document classification with **`emotional-traits`** taxonomy | `/document classification/emotional-traits.py`
-Document classification with **`behavioral-traits`** taxonomy | `/document classification/behavioral-traits.py`
-Document classification, self-documentation resources: list of available taxonomies | `/document classification/taxonomies.py`
-Document classification, self-documentation resources: category tree of the `iptc` taxonomy | `/document classification/category-tree-iptc.py`
-Document classification, self-documentation resources: category tree of the `geotax` taxonomy | `/document classification/category-tree-geotax.py`
-Document classification, self-documentation resources: category tree of the `emotional-traits` taxonomy | `/document classification/category-tree-emotional-traits.py`
-Document classification, self-documentation resources: category tree of the `behavioral-traits` taxonomy | `/document classification/category-tree-behavioral-traits.py`
-Information detection with **`pii`** detector | `/information detection/pii.py`
-Information detection with **`writeprint`** detector | `/information detection/writeprint.py`
-Information detection with **`temporal-information`** detector | `/information detection/temporal-information.py`
-Information detection, self-documentation resources: list of available detectors | `/information detection/detectors.py`
+Document analysis, `standard` context, **full analysis** | `document analysis/full.py`
+Document analysis, `standard` context, sub-analysis: **Deep linguistic analysis** | `document analysis/deep-linguistic-analysis.py`
+Document analysis, `standard` context, sub-analysis: **Keyphrase extraction** | `document analysis/keyphrase-extraction.py`
+Document analysis, `standard` context, sub-analysis: **Named entity recognition** | `document analysis/named-entity-recognition.py`
+Document analysis, `standard` context, sub-analysis: **Relation extraction** | `document analysis/relation-extraction.py`
+Document analysis, `standard` context, sub-analysis: **Sentiment analysis** | `document analysis/sentiment-analysis.py`
+Document analysis, self-documemtation esources: list of the available **contexts** | `document analysis/contexts.py`
+Document classification with **`iptc`** taxonomy | `document classification/iptc.py`
+Document classification with **`geotax`** taxonomy | `document classification/geotax.py`
+Document classification with **`emotional-traits`** taxonomy | `document classification/emotional-traits.py`
+Document classification with **`behavioral-traits`** taxonomy | `document classification/behavioral-traits.py`
+Document classification, self-documentation resources: list of available taxonomies | `document classification/taxonomies.py`
+Document classification, self-documentation resources: category tree of the `iptc` taxonomy | `document classification/category-tree-iptc.py`
+Document classification, self-documentation resources: category tree of the `geotax` taxonomy | `document classification/category-tree-geotax.py`
+Document classification, self-documentation resources: category tree of the `emotional-traits` taxonomy | `document classification/category-tree-emotional-traits.py`
+Document classification, self-documentation resources: category tree of the `behavioral-traits` taxonomy | `document classification/category-tree-behavioral-traits.py`
+Information detection with **`pii`** detector | `information detection/pii.py`
+Information detection with **`writeprint`** detector | `information detection/writeprint.py`
+Information detection with **`temporal-information`** detector | `information detection/temporal-information.py`
+Information detection with **`esg-sentiment`** detector | `information detection/esg-sentiment.py`
+Information detection with **`hate-speech`** detector | `information detection/hate-speech.py`
+Information detection, self-documentation resources: list of available detectors | `information detection/detectors.py`
 
 #### Studio Local Deployment Agent
 
@@ -133,12 +125,12 @@ You can find these scripts under the `/samples/studio lda` folder.
 
 Capability | Sample
 --- | ---
-Document analysis, **full analysis** | `/document analysis/full.py`
-Document analysis, sub-analysis: **Deep linguistic analysis** | `/document analysis/deep-linguistic-analysis.py`
-Document analysis, sub-analysis: **Keyphrase extraction** | `/document analysis/keyphrase-extraction.py`
-Document analysis, sub-analysis: **Named entity recognition** | `/document analysis/named-entity-recognition.py`
-Document analysis, sub-analysis: **Relation extraction** | `/document analysis/relation-extraction.py`
-Document analysis, sub-analysis: **Sentiment analysis** | `/document analysis/sentiment-analysis.py`
+Document analysis, **full analysis** | `document analysis/full.py`
+Document analysis, sub-analysis: **Deep linguistic analysis** | `document analysis/deep-linguistic-analysis.py`
+Document analysis, sub-analysis: **Keyphrase extraction** | `document analysis/keyphrase-extraction.py`
+Document analysis, sub-analysis: **Named entity recognition** | `document analysis/named-entity-recognition.py`
+Document analysis, sub-analysis: **Relation extraction** | `document analysis/relation-extraction.py`
+Document analysis, sub-analysis: **Sentiment analysis** | `document analysis/sentiment-analysis.py`
 
 ### Changing the language
 
@@ -147,8 +139,8 @@ You can use self-documentations resources like `contexts` and `taxonomies`&mdash
 If it's available, specify the `language` parameter in your code, for example:
 
 ```python
-text = "Michael Jordan è stato uno dei migliori giocatori di pallacanestro di tutti i tempi. Fare canestro è stata la capacità in cui Jordan spiccava, ma ancora detiene un record NBA di gioco difensivo, con otto palle rubate in metà partita."
-language= 'it'
+text = "Michael Jordan was one of the best basketball players of all time. Scoring was Jordan's stand-out skill, but he still holds a defensive NBA record, with eight steals in a half."
+language= 'en'
 
 output = client.specific_resource_analysis(
     body={"document": {"text": text}}, 
