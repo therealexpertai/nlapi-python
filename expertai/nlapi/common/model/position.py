@@ -14,7 +14,7 @@
 
 
 class Position:
-    def __init__(self, start=0, end=0):
+    def __init__(self, start=0, end=0, **kwargs):
         self._start = start
         self._end = end
 

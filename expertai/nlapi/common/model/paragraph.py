@@ -16,7 +16,7 @@ from expertai.nlapi.common.model.position import Position
 
 
 class Paragraph(Position):
-    def __init__(self, sentences, start, end):
+    def __init__(self, sentences, start, end, **kwargs):
         super().__init__(start=start, end=end)
         self._sentences = sentences
 

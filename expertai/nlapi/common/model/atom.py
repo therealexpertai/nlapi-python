@@ -17,7 +17,7 @@ from expertai.nlapi.common.model.position import Position
 
 
 class Atom(Position):
-    def __init__(self, lemma, start, end, type=None, type_=None):
+    def __init__(self, lemma, start, end, type=None, type_=None, **kwargs):
         """Initialise the Atom object
 
         To minimise the `abuse` of the Python `type` keyword, the

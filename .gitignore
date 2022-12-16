@@ -13,3 +13,4 @@ dist/
 
 test_edge.py
 expertai/cloud/nlpi.http
+/.idea/

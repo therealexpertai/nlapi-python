@@ -17,7 +17,7 @@ from expertai.nlapi.common.model.position import Position
 
 
 class MainLemma:
-    def __init__(self, value, score, positions):
+    def __init__(self, value, score, positions, **kwargs):
         self._value = value
         self._score = score
         self._positions = []

@@ -16,7 +16,7 @@ from expertai.nlapi.common.errors import ETypeError, EValueError, MissingArgumen
 from expertai.nlapi.common.model.position import Position
 
 class Attribute:
-    def __init__(self, attribute, lemma, syncon, type=None, type_=None, attributes=[]):
+    def __init__(self, attribute, lemma, syncon, type=None, type_=None, attributes=[], **kwargs):
         self._attribute = attribute
         self._lemma = lemma
         self._syncon = syncon
@@ -57,7 +57,7 @@ class Attribute:
 
 
 class Entity:
-    def __init__(self, syncon, lemma, positions, type=None, type_=None, relevance=0, attributes=[]):
+    def __init__(self, syncon, lemma, positions, type=None, type_=None, relevance=0, attributes=[], **kwargs):
         """Initialise the Entity object
 
         To minimise the `abuse` of the Python `type` keyword, the

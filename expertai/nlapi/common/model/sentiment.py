@@ -15,7 +15,7 @@
 from expertai.nlapi.common.errors import ETypeError, EValueError
 
 class Items:
-    def __init__(self, lemma, syncon, sentiment, items=[]):
+    def __init__(self, lemma, syncon, sentiment, items=[], **kwargs):
         self._lemma = lemma
         self._syncon = syncon
         self._sentiment = sentiment
@@ -50,7 +50,7 @@ class Items:
         return self._items        
 
 class Sentiment:
-    def __init__(self, overall, negativity, positivity, items=[]):
+    def __init__(self, overall, negativity, positivity, items=[], **kwargs):
         self._overall = overall
         self._negativity = negativity
         self._positivity = positivity

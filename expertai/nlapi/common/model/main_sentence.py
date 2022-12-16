@@ -16,7 +16,7 @@ from expertai.nlapi.common.model.position import Position
 
 
 class MainSentence(Position):
-    def __init__(self, value, score, start, end):
+    def __init__(self, value, score, start, end, **kwargs):
         super().__init__(start=start, end=end)
         self._value = value
         self._score = score

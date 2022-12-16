@@ -28,6 +28,7 @@ class Category:
         positions,
         id=None,
         id_=None,
+        **kwargs
     ):
         """Initialise the Category object
 

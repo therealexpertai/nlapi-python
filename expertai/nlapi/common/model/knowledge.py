@@ -17,7 +17,7 @@ from expertai.nlapi.common.model.eproperty import Property
 
 
 class Knowledge:
-    def __init__(self, syncon, label, properties=[]):
+    def __init__(self, syncon, label, properties=[], **kwargs):
         self._syncon = syncon
         self._label = label
         self._properties = []

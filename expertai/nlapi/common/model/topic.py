@@ -16,7 +16,7 @@ from expertai.nlapi.common.errors import MissingArgumentError
 
 
 class Topic:
-    def __init__(self, label, score, winner, id=None, id_=None):
+    def __init__(self, label, score, winner, id=None, id_=None, **kwargs):
         """Initialise the Dependency object
 
         To minimise the `abuse` of the Python `type` id, the

@@ -18,7 +18,7 @@ from expertai.nlapi.common.model.token import Token
 
 
 class Phrase(Position):
-    def __init__(self, tokens, start, end, type=None, type_=None):
+    def __init__(self, tokens, start, end, type=None, type_=None, **kwargs):
         """Initialise the Phrase object
 
         To minimise the `abuse` of the Python `type` keyword, the

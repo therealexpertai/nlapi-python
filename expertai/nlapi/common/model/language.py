@@ -16,7 +16,7 @@ from expertai.nlapi.common import constants
 
 
 class Language:
-    def __init__(self, name="", description=""):
+    def __init__(self, name="", description="", **kwargs):
         self._name = name
         self._description = description
 

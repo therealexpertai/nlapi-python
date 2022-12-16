@@ -18,7 +18,7 @@ from expertai.nlapi.common.model.position import Position
 
 
 class Sentence(Position):
-    def __init__(self, phrases, start, end):
+    def __init__(self, phrases, start, end, **kwargs):
         super().__init__(start=start, end=end)
         self._phrases = []
         if not isinstance(phrases, list):

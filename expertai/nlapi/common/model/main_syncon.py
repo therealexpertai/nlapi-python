@@ -17,7 +17,7 @@ from expertai.nlapi.common.model.position import Position
 
 
 class MainSyncon:
-    def __init__(self, syncon, score, positions, lemma=""):
+    def __init__(self, syncon, score, positions, lemma="", **kwargs):
         self._syncon = syncon
         self._lemma = lemma
         self._score = score

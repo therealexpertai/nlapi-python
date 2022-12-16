@@ -19,7 +19,7 @@ class Property:
     the Python's reserved keyword `property`.
     """
 
-    def __init__(self, value, type=None, type_=None):
+    def __init__(self, value, type=None, type_=None, **kwargs):
         """Initialise the Property object
 
         To minimise the `abuse` of the Python `type` keyword, the

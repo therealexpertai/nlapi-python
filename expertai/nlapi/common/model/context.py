@@ -16,7 +16,7 @@ from expertai.nlapi.common import constants
 from expertai.nlapi.common.errors import ETypeError, EValueError
 
 class ContextLanguage:
-    def __init__(self, code, name="", analyses=[]):
+    def __init__(self, code, name="", analyses=[], **kwargs):
         self._code = code
         self._name = name
         self._analyses = analyses
@@ -34,7 +34,7 @@ class ContextLanguage:
         return self._analyses        
 
 class Context:
-    def __init__(self, name, description, languages, contract=None):
+    def __init__(self, name, description, languages, contract=None, **kwargs):
         self._name = name
         self._description = description
         self._languages = []

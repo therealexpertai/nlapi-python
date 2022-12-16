@@ -16,7 +16,7 @@ from expertai.nlapi.common.errors import MissingArgumentError
 
 
 class VSyncon:
-    def __init__(self, parent, id=None, id_=None):
+    def __init__(self, parent, id=None, id_=None, **kwargs):
         """Initialise the VSyncon object
 
         To minimise the `abuse` of the Python `type` id, the

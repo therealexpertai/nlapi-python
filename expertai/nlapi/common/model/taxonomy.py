@@ -16,7 +16,7 @@ from expertai.nlapi.common import constants
 from expertai.nlapi.common.errors import ETypeError, EValueError
 
 class TaxoLanguage:
-    def __init__(self, code, name=""):
+    def __init__(self, code, name="", **kwargs):
         self._code = code
         self._name = name
 
@@ -29,7 +29,7 @@ class TaxoLanguage:
         return self._name
 
 class TaxonomyList:
-    def __init__(self, name, description, languages, contract=""):
+    def __init__(self, name, description, languages, contract="", **kwargs):
         self._name = name
         self._description = description
         self._contract = contract
@@ -64,7 +64,7 @@ class TaxonomyList:
         return self._languages
 
 class Categories:
-    def __init__(self, id, label="", categories=[]):
+    def __init__(self, id, label="", categories=[], **kwargs):
         self._id = id
         self._label = label
         self._categories = []
@@ -93,7 +93,7 @@ class Categories:
         return self._categories        
 
 class Taxonomy:
-    def __init__(self, namespace, taxonomy):
+    def __init__(self, namespace, taxonomy, **kwargs):
         self._namespace = namespace
         self._categories = []
 

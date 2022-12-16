@@ -15,7 +15,7 @@
 from expertai.nlapi.common.errors import ETypeError, EValueError
 
 class Verb:
-    def __init__(self, text, lemma, syncon, phrase, relevance, type=None, type_=None):
+    def __init__(self, text, lemma, syncon, phrase, relevance, type=None, type_=None, **kwargs):
         self._text = text
         self._lemma = lemma
         self._syncon = syncon
@@ -48,7 +48,7 @@ class Verb:
         return self._type        
 
 class Related:
-    def __init__(self, relation, text, lemma, syncon, phrase, relevance, related=[], type=None, type_=None):
+    def __init__(self, relation, text, lemma, syncon, phrase, relevance, related=[], type=None, type_=None, **kwargs):
         self._relation = relation
         self._text = text
         self._lemma = lemma
@@ -103,7 +103,7 @@ class Related:
         return self._related        
 
 class Relation:
-    def __init__(self, verb, related=[]):
+    def __init__(self, verb, related=[], **kwargs):
         self._verb = {}
         self._related = []
 

@@ -16,7 +16,7 @@ from expertai.nlapi.common import constants
 from expertai.nlapi.common.errors import ETypeError, EValueError
 
 class Field:
-    def __init__(self, name, type):
+    def __init__(self, name, type, **kwargs):
         self._name = name
         self._type = type
 
@@ -29,7 +29,7 @@ class Field:
         return self._type
 
 class Template:
-    def __init__(self, name, fields):
+    def __init__(self, name, fields, **kwargs):
         self._name = name
         self._fields = []
 

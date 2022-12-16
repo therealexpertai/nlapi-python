@@ -36,6 +36,7 @@ class Token(Position):
         vsyn=None,
         type=None,
         type_=None,
+        **kwargs
     ):
         """Initialise the Property object
 

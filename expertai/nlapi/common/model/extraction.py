@@ -16,7 +16,7 @@ from expertai.nlapi.common.errors import ETypeError, EValueError, MissingArgumen
 from expertai.nlapi.common.model.position import Position
 
 class ExtractionField:
-    def __init__(self, name, value, positions=[]):
+    def __init__(self, name, value, positions=[], **kwargs):
         self._name = name
         self._value = value
 
@@ -49,7 +49,8 @@ class Extraction:
         self,
         namespace,
         template,
-        fields
+        fields,
+        **kwargs
     ):
 
         if not template:

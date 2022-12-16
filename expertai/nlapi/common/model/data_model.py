@@ -77,7 +77,8 @@ class DataModel:
         extractions=[],                
         data=[],
         extra_data={},
-        detectors=[]
+        detectors=[],
+        **kwargs
     ):
         self._content = content
         self._language = language
