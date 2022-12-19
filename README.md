@@ -17,7 +17,7 @@ Where does it run? | In the Cloud, shared by all users | On user's PC
 Document analysis: | YES | YES
 Document classification with ready-to-use taxonomies (IPTC Media topics, GeoTax, Emotional traits, Behavioral traits) | YES | NO
 Custom document classification | NO | YES*
-Information detection with ready-to-use detectors (Personally Identifiable Information (PII), Writeprint, Temporal information, ESG Sentiment, Hate speech) | YES | NO
+Information detection with ready-to-use detectors (Personally Identifiable Information (PII), Writeprint, Temporal information, ESG Sentiment, Hate speech, Sentiment) | YES | NO
 Custom information extraction | NO | YES*
 Document size limit? | YES (<= 10KB)| NO
 Document number limit? | NO | See the [Service Level Agreement](https://policies.expert.ai/slda/sla/)
@@ -117,6 +117,7 @@ Information detection with **`writeprint`** detector | `information detection/wr
 Information detection with **`temporal-information`** detector | `information detection/temporal-information.py`
 Information detection with **`esg-sentiment`** detector | `information detection/esg-sentiment.py`
 Information detection with **`hate-speech`** detector | `information detection/hate-speech.py`
+Information detection with **`sentiment`** detector | `information detection/sentiment.py`
 Information detection, self-documentation resources: list of available detectors | `information detection/detectors.py`
 
 #### Studio Local Deployment Agent
